@@ -1,0 +1,35 @@
+<!-- 标题栏 -->
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+  <view class='content'>沈理助手</view>
+  </view>
+</view>
+<!-- 周选择 -->
+<scroll-view scroll-x class="bg-white nav shadow-warp" scroll-with-animation scroll-left="{{scrollLeft}}rpx">
+  <view class="cu-item text-grey {{index+1==TabCur?'text-green cur':''}}" wx:for="{{20}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+    第{{index+1}}周
+  </view>
+</scroll-view>
+<!-- 课程表 -->
+<view class="margin-top cu-list grid col-5">
+  <view class="cu-item text-black" wx:for="{{weekList}}" wx:key> 
+    <text class='text-black'>{{item}}</text>
+  </view>
+</view>
+<view class="cu-list grid col-{{gridCol}} ">
+  <view class="cu-item " wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}"> 
+    <text>{{item.name}}</text>
+    <text >A-430</text>
+  </view>
+</view>
+<view class="cu-bar bg-white">
+  <view class='action'>
+    <text class='content text-gray'>午休</text>
+  </view>
+</view>
+<view class="cu-list grid col-{{gridCol}} solid-top">
+  <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
+    <text >{{item.name}}</text>
+    <text >XX-130</text>
+  </view>
+</view>

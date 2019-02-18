@@ -1,0 +1,26 @@
+<!--pages/plugin/home/home.wxml-->
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+  <view class='content'>沈理助手</view>
+  </view>
+</view>
+<view class="cu-list menu margin-top shadow-lg">
+  <view class="cu-item arrow">
+    <navigator class='content' hover-class='none' url='../square/square' open-type="redirect">
+      <text class='icon-community text-blue'></text>
+      <text class='text-grey'>校园广场</text>
+    </navigator>
+  </view>
+  <view class="cu-item arrow">
+    <navigator class='content' hover-class='none' url='../markCount/markCount' open-type="redirect">
+      <text class='icon-list text-cyan'></text>
+      <text class='text-grey'>绩点计算</text>
+    </navigator>
+  </view>
+  <view class="cu-item arrow">
+    <navigator class='content' hover-class='none' url='../freeSource/freeSource' open-type="redirect">
+      <text class='icon-friend text-mauve'></text>
+      <text class='text-grey'>我要蹭课</text>
+    </navigator>
+  </view>
+</view>

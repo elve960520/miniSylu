@@ -1,0 +1,27 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class='content'>沈理助手</view>
+  </view>
+</view>
+<!-- 学期选择 -->
+<view class="cu-form-group shadow-warp text-grey">
+  <view class='title'>多列选择</view>
+  <picker mode="multiSelector" bindchange="MultiChange"  value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">
+      {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+    </view>
+  </picker>
+</view>
+
+<view class="cu-list menu sm-border  margin-top shadow-lg">
+  <view class="cu-item" wx:for="{{markArray}}" wx:key><!-- arrow -->
+    <view class='content'>
+      <text class='text-grey'>{{item.name}}</text>
+    </view>
+    <view class='action'>
+      <view class="cu-tag round bg-olive light" wx:if="{{item.mark>=90}}">优秀</view>
+      <view class="cu-tag round bg-blue light" wx:if="{{item.mark>=60&&item.mark<=90}}">及格</view>
+      <view class="cu-tag round bg-red light" wx:if="{{item.mark<60}}">不及格</view>
+    </view>
+  </view>
+</view>

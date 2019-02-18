@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/source/source",
+    "pages/mark/mark",
+    "pages/plugin/home/home",
+    "pages/about/home/home",
+    "pages/index/index",
+    "pages/about/about/about",
+    "pages/about/log/log",
+    "pages/about/opinion/opinion",
+    "pages/plugin/square/square",
+    "pages/plugin/markCount/markCount",
+    "pages/plugin/freeSource/freeSource"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "课程表",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "custom": false,
+    "color": "#aaa",
+    "selectedColor": "#39b54a",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/source/source",
+        "iconPath": "images/tabbar/basics.png",
+        "selectedIconPath": "images/tabbar/basics_cur.png",
+        "text": "课程表"
+      },
+      {
+        "pagePath": "pages/mark/mark",
+        "iconPath": "images/tabbar/component.png",
+        "selectedIconPath": "images/tabbar/component_cur.png",
+        "text": "成绩"
+      },
+      {
+        "pagePath": "pages/plugin/home/home",
+        "iconPath": "images/tabbar/plugin.png",
+        "selectedIconPath": "images/tabbar/plugin_cur.png",
+        "text": "拓展"
+      },
+      {
+        "pagePath": "pages/about/home/home",
+        "iconPath": "images/tabbar/about.png",
+        "selectedIconPath": "images/tabbar/about_cur.png",
+        "text": "关于"
+      }
+    ]
+  }
+}

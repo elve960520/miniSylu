@@ -1,0 +1,8 @@
+<!--pages/about/opinion/opinion.wxml-->
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class='action' bindtap='bindBack' hover-class="none">
+      <text class='icon-back'></text> 意见反馈
+    </view>
+  </view>
+</view>
