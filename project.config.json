@@ -3,7 +3,6 @@
 	"packOptions": {
 		"ignore": []
 	},
-	"cloudfunctionRoot": "cloud-functions/",
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
@@ -17,7 +16,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.2",
 	"appid": "wxe976181001e934f8",
-	"projectname": "ColorUI-template",
+	"projectname": "syluCloud",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

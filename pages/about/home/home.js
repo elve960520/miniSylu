@@ -9,7 +9,7 @@ Page({
     visitTotal: app.globalData.viewNumber,
     starCount: app.globalData.starNumber,
     imageList: ['https://syluCloud.cn/zan'],
-    stared:false
+    stared: false
   },
 
   coutNum(e) {
@@ -55,15 +55,17 @@ Page({
       }
     }
   },
-  clickStar:function(){
+  clickStar: function () {
     let that = this;
-    if(that.data.stared){
+    if (that.data.stared) {
       that.setData({
-        stared:false
+        stared: false,
+        starCount: that.data.starCount - 1
       })
-    }else{
+    } else {
       that.setData({
-        stared:true
+        stared: true,
+        starCount: that.data.starCount + 1
       })
     }
     let xuehao = wx.getStorageSync('xuehao')
@@ -75,7 +77,7 @@ Page({
       },
       header: {
         'content-type': 'application/json' // 默认值
-      }, 
+      },
       method: 'post',
       success(res) {
         console.log(res.data)
@@ -102,7 +104,7 @@ Page({
         if (star == null) {
           star = false;
         }
-        
+
         that.setData({
           visitTotal: res.data.viewNum,
           starCount: res.data.starNum,
@@ -116,7 +118,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**

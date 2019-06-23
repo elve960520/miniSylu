@@ -11,10 +11,13 @@
   <view class="cu-item">
     <view class="content">
       <view class="cu-capsule radius">
-        <view class="cu-tag bg-cyan">V1.0(测试)</view>
+        <view class="cu-tag bg-cyan">V1.0</view>
         <view class="cu-tag line-cyan">2019/6/16</view>
       </view>
-      <view class='margin-top'>蛰伏了大半年，终于把第一个版本发布，太不容易了。微信API都更新好几版了，好多需要一直改，hhhh</view>
+      <view class='margin-top'>
+      蛰伏了大半年，终于把第一个版本发布，太不容易了。微信API都更新好几版了，好多需要一直改，不管怎么样还是很开心的</view>
+      <view>DONE:课程表，成绩，绩点，蹭课</view>
+      <view>TODO:校园广场，我的社团</view>
     </view>
   </view>
 </view>

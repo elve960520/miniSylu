@@ -1,21 +1,11 @@
 <!--pages/about/about.wxml-->
-<!-- <view class='UCenter-bg'>
-  <image src='/images/wave.gif' class='gif-wave bg-white' mode='widthFix' style='width:750rpx' >
-  </image> -->
-<!-- <view class='text-xl '>沈理助手
-    <text class='text-df'>v1.0</text>
-  </view>
-  <view class='margin-top-sm '>
-    <text>By:孟凡宇</text>
-  </view> -->
-<!-- </view> -->
 <view class="bg-img bg-mask padding-tb-xl" style="background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3870565191,2508149218&fm=26&gp=0.jpg')">
   <view class='padding-xl text-white'>
     <view class='padding-xs text-xl'>
-      沈理助手 V1.0(测试)
+      沈理助手 
     </view>
     <view class='padding-xs'>
-      <!-- By:孟凡宇 -->
+      V1.0
     </view>
   </view>
 </view>
