@@ -7,7 +7,68 @@ Page({
    */
   data: {
     StatusBar: app.globalData.StatusBar,
-    CustomBar: app.globalData.CustomBar
+    CustomBar: app.globalData.CustomBar,
+    classify: ["BUG反馈", "开发建议", "联系作者"],
+    modalName: null,
+    index: 0,
+    textArea: '',
+    phoneNUmber: ''
+  },
+  PickerChange(e) {
+    console.log(e);
+    this.setData({
+      index: e.detail.value
+    })
+  },
+  textareaInput(e) {
+    console.log(e);
+    this.setData({
+      textArea: e.detail.value
+    })
+  },
+  phoneInput(e) {
+    console.log(e);
+    this.setData({
+      phoneNUmber: e.detail.value
+    })
+  },
+  fromSubmit(e) {
+    var that = this;
+    wx.showLoading({
+      title: '正在提交...',
+    })
+    let xuehao = wx.getStorageSync('xuehao')
+    wx.request({
+      url: 'https://sylucloud.cn/sendOpinion', //第四个函数
+      data: {
+        xuehao: xuehao,
+        classify: that.data.classify[that.data.index],
+        text: that.data.textArea,
+        phone: that.data.phoneNUmber
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'post',
+      success(res) {
+        wx.hideLoading()
+        console.log(res.data)
+        if (res.data == "ok") {
+          that.setData({
+            modalName: 'Modal'
+          })
+        }else{
+          that.setData({
+            modalName: 'errModal'
+          })
+        }
+      }
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
   },
   //回退
   bindBack: function (options) {

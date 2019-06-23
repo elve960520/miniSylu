@@ -10,9 +10,10 @@
   <view class='text-center margin-bottom text-lg  text-grey'>关于沈理助手</view>
   <view class='text-content'>
     <view>Hi！同学们~欢迎使用沈理助手！</view>
-    <view class='margin-top-sm'>该项目是我个人开发的一款高颜值的微信小程序组件库。这个项目不仅有一些漂亮的基础元素，还有一些实用的组件。扩展中心也会不定期更新一些小程序的解决方案，或者你有一些好的想法可以在GitHub里提交给我，我会加入到扩展里。</view>
-    <view class='margin-top-sm'>项目是开源的，不收取任何费用，如果这个项目有帮到你，或者你觉得很赞，可以在GitHub里扫描赞赏码支持一下！</view>
-    <view class='margin-top-sm'>该项目你可以用到除组件库小程序的任何项目。作者我也是花了时间和精力的，我不希望你拷贝一份，做一些修改发布就变成了一个独立的项目，当然！扩展再发布是可以的，但前提是注明一下我这个原作者٩(๑❛ᴗ❛๑)۶</view>
-    <view class='margin-top-sm'>更多功能敬请期待！(</view>
+    <view class='margin-top-sm'>本小程序是本人开发的一个练手项目，旨在方便同学们查询课表和成绩，如果童鞋们觉得还不错，可以点击右上角...添加到我的小程序，以便下次使用，谢谢</view>
+    <view class='margin-top-sm'>下一步打算添加校园广场和社团功能，将其打造的更完整一些，项目是不收取任何费用的，当然如果你觉得很赞，可以赞赏支持一下，以纪念那些逝去的时光哈哈哈</view>
+    <view class='margin-top-sm'>另：如果童鞋们对项目感兴趣，也想成为贡献者或开发者，或者想学习该程序都可以联系我email：elve960520@163.com</view>
+    <!-- <view class='margin-top-sm'>更多功能敬请期待！</view> -->
+    <view class='margin-top-sm'>-------孟凡宇</view>
   </view>
 </view>

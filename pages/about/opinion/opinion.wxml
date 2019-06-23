@@ -6,3 +6,47 @@
     </view>
   </view>
 </view>
+<view class="cu-form-group margin-top">
+  <view class='title'>反馈种类</view>
+  <picker bindchange="PickerChange" value="{{index}}" range="{{classify}}">
+    <view class="picker">
+      {{classify[index]}}
+    </view>
+  </picker>
+</view>
+<view class="cu-form-group margin-top" wx:hide="{{modalName==null}}">
+  <textarea placeholder="输入详细反馈信息" maxlength="-1" disabled="{{modalName!=null}}" placeholder-class='placeholder' bindinput='textareaInput'></textarea>
+</view>
+<view class="cu-form-group">
+  <view class='title'>手机/微信</view>
+  <input placeholder="选填部分" class='radius text-gray' name='input' bindinput='phoneInput'></input>
+</view>
+<view class="cu-bar btn-group margin-top">
+  <button class='cu-btn bg-green shadow-blur round lg' bindtap='fromSubmit'>提交</button>
+</view>
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>提示</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      提交成功！
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='errModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>提示</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      提交失败，请检查网络！
+    </view>
+  </view>
+</view>

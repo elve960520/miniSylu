@@ -10,7 +10,8 @@
     "pages/about/opinion/opinion",
     "pages/plugin/square/square",
     "pages/plugin/markCount/markCount",
-    "pages/plugin/freeSource/freeSource"
+    "pages/plugin/freeSource/freeSource",
+    "pages/plugin/myAssociation/myAssociation"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -51,5 +52,6 @@
         "text": "关于"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

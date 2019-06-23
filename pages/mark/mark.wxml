@@ -1,27 +1,40 @@
+<!-- 标题 -->
 <view class="cu-custom" style="height:{{CustomBar}}px;">
   <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
     <view class='content'>沈理助手</view>
   </view>
 </view>
+<!-- 加载栏 -->
+<!-- <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+  <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+</view> -->
 <!-- 学期选择 -->
 <view class="cu-form-group shadow-warp text-grey">
-  <view class='title'>多列选择</view>
-  <picker mode="multiSelector" bindchange="MultiChange"  value="{{multiIndex}}" range="{{multiArray}}">
+  <view class='title'>学期选择</view>
+  <picker mode="multiSelector" bindchange="MultiChange" bindcolumnchange="MultiColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
     <view class="picker">
-      {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+      {{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}
     </view>
   </picker>
 </view>
-
+<!-- 成绩选择 -->
 <view class="cu-list menu sm-border  margin-top shadow-lg">
   <view class="cu-item" wx:for="{{markArray}}" wx:key><!-- arrow -->
     <view class='content'>
-      <text class='text-grey'>{{item.name}}</text>
+      <text class='text-grey'>{{item.markStatus}}</text>
     </view>
     <view class='action'>
-      <view class="cu-tag round bg-olive light" wx:if="{{item.mark>=90}}">优秀</view>
-      <view class="cu-tag round bg-blue light" wx:if="{{item.mark>=60&&item.mark<=90}}">及格</view>
-      <view class="cu-tag round bg-red light" wx:if="{{item.mark<60}}">不及格</view>
+      <view class="cu-tag round bg-olive light" wx:if="{{item.markValue>=4}}">{{50+item.markValue*10}}</view>
+      <view class="cu-tag round bg-green light" wx:if="{{item.markValue>=3&&item.markValue<4}}">{{50+item.markValue*10}}</view>
+      <view class="cu-tag round bg-cyan light" wx:if="{{item.markValue>=2&&item.markValue<3}}">{{50+item.markValue*10}}</view>
+      <view class="cu-tag round bg-blue light" wx:if="{{item.markValue>=1&&item.markValue<2}}">{{50+item.markValue*10}}</view>
+      <view class="cu-tag round bg-red light" wx:if="{{item.markValue<1}}">0</view>
     </view>
   </view>
+</view>
+<!-- 加载弹窗 -->
+<view class='cu-load load-modal' wx:if="{{loadModal}}"> 
+    <view class='icon-creativefill text-cyan'></view>
+    <!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
+    <view class='gray-text'>{{loadtext}}</view>
 </view>

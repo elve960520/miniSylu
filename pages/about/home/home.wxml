@@ -12,10 +12,10 @@
 <view class="bg-img bg-mask padding-tb-xl" style="background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3870565191,2508149218&fm=26&gp=0.jpg')">
   <view class='padding-xl text-white'>
     <view class='padding-xs text-xl'>
-      沈理助手 V1.0
+      沈理助手 V1.0(测试)
     </view>
     <view class='padding-xs'>
-      By:孟凡宇
+      <!-- By:孟凡宇 -->
     </view>
   </view>
 </view>
@@ -23,12 +23,14 @@
   <view class='flex flex-sub flex-direction solid-right'>
     <view class="text-xxl text-orange">{{visitTotal}}</view>
     <view class="margin-top-sm">
-      <text class='icon-attentionfill'></text> View</view>
+      <text class='icon-attentionfill' bindtap='test'></text> View</view>
   </view>
   <view class='flex flex-sub flex-direction'>
     <view class="text-xxl text-blue">{{starCount}}</view>
-    <view class="margin-top-sm">
-      <text class='icon-favorfill'></text> Star</view>
+    <view class="margin-top-sm" bindtap='clickStar'>
+      <text class='icon-favorfill'wx:if="{{stared}}"></text>
+      <text class='icon-favor'wx:else></text>
+       Star</view>
   </view>
 </view>
 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">

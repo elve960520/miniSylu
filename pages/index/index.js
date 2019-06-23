@@ -6,54 +6,122 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    motto: 'Hi 开发者！',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    xuehao: '',
+    mima: '',
+    modalName: null
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../source/source'
+
+  setXuehao: function(e) {
+    this.setData({
+      xuehao: e.detail.value
+    });
+    wx.setStorage({
+      key: 'xuehao',
+      data: e.detail.value,
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+  setMima: function(e) {
+    this.setData({
+      mima: e.detail.value
+    });
+    wx.setStorage({
+      key: 'mima',
+      data: e.detail.value,
+    })
+  },
+
+  onLoad: function() {
+  },
+
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+  getUserInfo: function(e) {
+    var indexPage = this;
+    if (!this.logged && e.detail.userInfo) {
+      wx.showLoading({
+        title: '验证学号密码...',
       })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+      wx.request({
+        url: 'https://sylucloud.cn/checkStudentAccount',
+        data: {
+          xuehao: this.data.xuehao,
+          mima: this.data.mima
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        method: 'post',
+        success(res) {
+          wx.hideLoading()
+          console.log(res.data)
+          wx.setStorage({
+            key: 'checkedAccount',
+            data: res.data.account,
           })
+          wx.setStorage({
+            key: 'name',
+            data: res.data.name,
+          })
+          if (res.data.account) {
+            indexPage.setData({
+              modalName: 'Modal'
+            })
+            //获取成绩
+            wx.request({
+              url: 'https://sylucloud.cn/getMark',
+              data: {
+                xuehao: wx.getStorageSync('xuehao'),
+                mima: wx.getStorageSync('mima')
+              },
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              method: 'post',
+              success(res) {
+                //wx.hideLoading()
+                console.log(res.data)
+                wx.setStorage({
+                  key: 'markArray',
+                  data: res.data,
+                })
+              }
+            })
+            //获取课表
+            wx.request({
+              url: 'https://sylucloud.cn/getSource',
+              data: {
+                xuehao: wx.getStorageSync('xuehao'),
+                mima: wx.getStorageSync('mima')
+              },
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              method: 'post',
+              success(res) {
+                //wx.hideLoading()
+                console.log(res.data)
+                wx.setStorage({
+                  key: 'sourceArray',
+                  data: res.data,
+                })
+              }
+            })
+            setTimeout(function() {
+              wx.switchTab({
+                url: '/pages/source/source',
+              })
+            }, 1500)
+          } else {
+            indexPage.setData({
+              modalName: 'errModal'
+            })
+          }
         }
       })
     }
-    wx.showTabBar({
-      
-    });
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
   }
 })

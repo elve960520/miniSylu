@@ -1014,7 +1014,7 @@ button.icon.lg {
   border-top: 6rpx solid rgba(0, 0, 0, 0.05);
   border-right: 6rpx solid rgba(0, 0, 0, 0.05);
   border-bottom: 6rpx solid rgba(0, 0, 0, 0.05);
-  border-left: 6rpx solid #f37b1d;
+  border-left: 6rpx solid #1cbbb4;
   animation: icon-spin 1s infinite linear;
   z-index: -1;
 }

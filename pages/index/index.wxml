@@ -5,13 +5,49 @@
 </view>
 <view class="margin-xl padding-xl bg-white radius shadow-lg">
   <view class="flex justify-center">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
-    <block wx:else>
-      <view class='text-center'>
-        <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
-        <view class="padding">{{userInfo.nickName}}</view>
+    <form >
+      <view class="cu-form-group">
+        <view class='title'>学号</view>
+        <input placeholder="教学网学号" class='radius' name='xuehao' bindinput='setXuehao' value=''></input>
       </view>
-    </block>
+      <view class="cu-form-group ">
+        <view class='title'>密码</view>
+        <input placeholder="教学网密码" class='radius ' name='mima' bindinput='setMima' value=''></input>
+      </view>
+      <view class="cu-form-group">
+        <view style='margin: 0 auto;'>
+          <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'>
+            绑定教学网账号
+          </button>
+        </view>
+      </view>
+    </form>
   </view>
 </view>
 
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>提示</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      绑定成功！
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='errModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>提示</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      绑定失败，请检查学号或密码！
+    </view>
+  </view>
+</view>
