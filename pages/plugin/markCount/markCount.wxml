@@ -38,9 +38,23 @@
     <button class='cu-btn bg-cyan shadow' bindtap="showModal" data-target="DrawerModalL">选择</button>
   </view>
 </view>
-<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap='hideModal'>
+<!-- <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap='hideModal'>
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
     <checkbox-group bindchange="checkboxChange">
+      <view class='cu-list menu text-left'>
+        <view class='cu-item' wx:for="{{classList}}" wx:key>
+          <label class='flex justify-between align-center flex-sub'>
+            <view class='flex-sub'>{{classList[index]}}</view>
+            <checkbox class='round cyan' value="{{classList[index]}}"></checkbox>
+          </label>
+        </view>
+      </view>
+    </checkbox-group>
+  </view>
+</view> -->
+<view class="cu-modal {{modalName=='DrawerModalL'?'show':''}}" bindtap='hideModal'>
+  <view class="cu-dialog" style="max-width:600rpx" catchtap>
+    <checkbox-group class="block" bindchange="checkboxChange">
       <view class='cu-list menu text-left'>
         <view class='cu-item' wx:for="{{classList}}" wx:key>
           <label class='flex justify-between align-center flex-sub'>
@@ -77,7 +91,7 @@
   </view>
 </checkbox-group>
 
-<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+<view class="cu-modal {{modalName=='sourceModal'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class='content'>提示</view>
@@ -87,6 +101,19 @@
     </view>
     <view class='padding-xl'>
       未选择课程！
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='yearModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>提示</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      未选择学年！
     </view>
   </view>
 </view>

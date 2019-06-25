@@ -117,24 +117,28 @@ Page({
   countMark: function () {
     var that = this;
     var countArry = that.data.countIndex;
-    if (countArry.length == 0){
+    if (that.data.yearIndex == '') {
       that.setData({
-        modalName:'Modal'
+        modalName: 'yearModal'
       })
-    }else{
+    } else if (countArry.length == 0) {
+      that.setData({
+        modalName: 'sourceModal'
+      })
+    } else {
       var markList = wx.getStorageSync('markArray');
       var countList = [];
       var i = 0;
-      for(let index = 0;index<markList.length;index++){
+      for (let index = 0; index < markList.length; index++) {
         let elem = markList[index];
-        for (let indexI = 0; indexI < countArry.length;indexI++){
-          if (elem.markNumber == countArry[indexI] && elem.markValue!='0'){
+        for (let indexI = 0; indexI < countArry.length; indexI++) {
+          if (elem.markNumber == countArry[indexI] && elem.markValue != '0') {
             countList[i++] = elem;
           }
         }
       }
-      var countMark=0,countValue=0;
-      for(let index = 0;index<countList.length;index++){
+      var countMark = 0, countValue = 0;
+      for (let index = 0; index < countList.length; index++) {
         let elem = countList[index];
         countMark += parseFloat(elem.markWidget) * parseFloat(elem.markValue);
         countValue += parseFloat(elem.markWidget);
@@ -142,31 +146,31 @@ Page({
       var averMark = countMark / countValue;
       console.log(averMark.toFixed(3))
       that.setData({
-        countResult: averMark.toFixed(1)
+        countResult: averMark.toFixed(2),
       })
-      var mark = averMark.toFixed(1);
+      var mark = averMark.toFixed(2);
       var i = 0;
       showMark();
-      function showMark(){
+      function showMark() {
         if (i < 2) {
           setTimeout(function () {
             that.setData({
-              countResult: i.toFixed(1)
+              countResult: i.toFixed(1),
             })
-            i = i+0.1
+            i = i + 0.1
             //console.log(i)
             showMark()
           }, 20)
         } else {
           that.setData({
-            countResult: mark
+            countResult: mark,
           })
         }
       }
     }
   },
 
-  showMark:function(){
+  showMark: function () {
     var that = this;
     var mark = that.data.countResult;
     if (i < 20) {
