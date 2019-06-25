@@ -17,7 +17,7 @@
       <view class='margin-top'>
         1.1版本中把绩点添加进来，目前可以查询绩点</view>
       <view>DONE:课程表，成绩，绩点</view>
-      <view>TODO:校园广场，我的社团，蹭课，理工通讯录</view>
+      <view>TODO:校园广场，我的社团，蹭课，理工通讯录，人群分布</view>
     </view>
   </view>
   <view class="cu-time">6-16</view>

@@ -2,7 +2,7 @@
 <view class="bg-img bg-mask padding-tb-xl" style="background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3870565191,2508149218&fm=26&gp=0.jpg')">
   <view class='padding-xl text-white'>
     <view class='padding-xs text-xl'>
-      沈理助手 
+      琴湖助手 
     </view>
     <view class='padding-xs'>
       V1.1
@@ -27,7 +27,7 @@
   <view class="cu-item arrow">
     <navigator class='content' url='../about/about' hover-class='none'>
       <text class='icon-explorefill text-blue'></text>
-      <text class='text-grey'>关于沈理助手</text>
+      <text class='text-grey'>关于琴湖助手</text>
     </navigator>
   </view>
   <view class="cu-item arrow">

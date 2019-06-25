@@ -44,7 +44,7 @@ Page({
             visitTotal: i,
             starCount: i
           })
-          i++
+          i++;
           numDH();
         }, 20)
       } else {

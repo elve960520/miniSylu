@@ -1,6 +1,6 @@
 <view class='cu-custom' style="height:{{CustomBar}}px;">
   <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-    <view class='content'>沈理助手</view>
+    <view class='content'>琴湖助手</view>
   </view>
 </view>
 <view class="margin-xl padding-xl bg-white radius shadow-lg">
