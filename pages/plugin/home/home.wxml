@@ -1,7 +1,7 @@
 <!--pages/plugin/home/home.wxml-->
 <view class="cu-custom" style="height:{{CustomBar}}px;">
   <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-  <view class='content'>沈理助手</view>
+    <view class='content'>沈理助手</view>
   </view>
 </view>
 <view class="cu-list menu margin-top shadow-lg">
@@ -17,16 +17,22 @@
       <text class='text-grey'>绩点计算</text>
     </navigator>
   </view>
-  <view class="cu-item arrow">
+  <!-- <view class="cu-item arrow">
     <navigator class='content' hover-class='none' url='../freeSource/freeSource' open-type="redirect">
       <text class='icon-friend text-mauve'></text>
       <text class='text-grey'>我要蹭课</text>
     </navigator>
-  </view>
+  </view> -->
   <!-- <view class="cu-item arrow">
     <navigator class='content' hover-class='none' url='../myAssociation/myAssociation' open-type="redirect">
       <text class='icon-friendfavor text-pink'></text>
       <text class='text-grey'>我的社团</text>
+    </navigator>
+  </view> -->
+  <!-- <view class="cu-item arrow">
+    <navigator class='content' hover-class='none' url='../freeSource/freeSource' open-type="redirect">
+      <text class='icon-friend text-mauve'></text>
+      <text class='text-grey'>理工通讯录</text>
     </navigator>
   </view> -->
 </view>

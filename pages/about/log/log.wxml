@@ -7,6 +7,19 @@
   </view>
 </view>
 <view class="cu-timeline">
+  <view class="cu-time">6-24</view>
+  <view class="cu-item">
+    <view class="content">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-cyan">V1.1(beta)</view>
+        <view class="cu-tag line-cyan">2019/6/24</view>
+      </view>
+      <view class='margin-top'>
+        1.1版本中把绩点添加进来，目前可以查询绩点</view>
+      <view>DONE:课程表，成绩，绩点</view>
+      <view>TODO:校园广场，我的社团，蹭课，理工通讯录</view>
+    </view>
+  </view>
   <view class="cu-time">6-16</view>
   <view class="cu-item">
     <view class="content">
@@ -15,9 +28,10 @@
         <view class="cu-tag line-cyan">2019/6/16</view>
       </view>
       <view class='margin-top'>
-      蛰伏了大半年，终于把第一个版本发布，太不容易了。微信API都更新好几版了，好多需要一直改，不管怎么样还是很开心的</view>
-      <view>DONE:课程表，成绩，绩点，蹭课</view>
-      <view>TODO:校园广场，我的社团</view>
+        蛰伏了大半年，终于把第一个版本发布，太不容易了。微信API都更新好几版了，好多需要一直改，不管怎么样还是很开心的</view>
+      <view>DONE:课程表，成绩</view>
+      <view>TODO:校园广场，我的社团，蹭课，理工通讯录，绩点</view>
+      <view>注:奇数版本为不稳定版本，偶数版本为稳定版本</view>
     </view>
   </view>
 </view>

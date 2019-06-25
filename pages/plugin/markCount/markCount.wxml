@@ -6,3 +6,87 @@
     </view>
   </view>
 </view>
+<!-- 学年选择 -->
+<view class="cu-bar bg-white margin-top">
+  <view class='action'>
+    <text class='icon-title text-blue '></text> 学年选择
+  </view>
+  <view class='action'>
+    <button class='cu-btn bg-cyan shadow' bindtap="showModal" data-target="RadioModal">选择</button>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='RadioModal'?'show':''}}" bindtap='hideModal'>
+  <view class="cu-dialog">
+    <radio-group class="block" bindchange="yearChange">
+      <view class='cu-list menu text-left'>
+        <view class='cu-item' wx:for="{{yearList}}" wx:key>
+          <label class='flex justify-between align-center flex-sub'>
+            <view class='flex-sub'>{{yearList[index]}}</view>
+            <radio class='round cyan' value="{{yearList[index]}}"></radio>
+          </label>
+        </view>
+      </view>
+    </radio-group>
+  </view>
+</view>
+<!-- 类别选择 -->
+<view class="cu-bar bg-white shadow-warp">
+  <view class='action'>
+    <text class='icon-title text-blue '></text> 课程选择
+  </view>
+  <view class='action'>
+    <button class='cu-btn bg-cyan shadow' bindtap="showModal" data-target="DrawerModalL">选择</button>
+  </view>
+</view>
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap='hideModal'>
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+    <checkbox-group bindchange="checkboxChange">
+      <view class='cu-list menu text-left'>
+        <view class='cu-item' wx:for="{{classList}}" wx:key>
+          <label class='flex justify-between align-center flex-sub'>
+            <view class='flex-sub'>{{classList[index]}}</view>
+            <checkbox class='round cyan' value="{{classList[index]}}"></checkbox>
+          </label>
+        </view>
+      </view>
+    </checkbox-group>
+  </view>
+</view>
+<view class='solids-bottom padding-xs flex align-center'>
+  <view class='flex-sub text-center'>
+    <view class='solid-bottom text-xsl padding'>
+      <text class='text-cyan'>{{countResult}}</text>
+    </view>
+    <view class='padding'>
+      <view class='cu-btn bg-gradual-blue round lg shadow' bindtap='countMark'>开始计算</view>
+    </view>
+  </view>
+</view>
+<checkbox-group bindchange="markChange">
+  <view class='cu-item' wx:for="{{markList}}" wx:key>
+    <label class='justify-between align-center flex-sub'>
+      <!-- <view class='flex-sub'>{{markList[index]}}</view>
+      <checkbox class='round' value="{{markList[index]}}"></checkbox> -->
+      <view class="cu-form-group">
+        <view class='title'>{{markList[index].markStatus}}
+        <text class='text-grey'>({{markList[index].markClass}})</text>
+        </view>
+        <checkbox class='round cyan' value='{{markList[index].markNumber}}' checked="{{markList[index].checked}}"></checkbox>
+      </view>
+    </label>
+  </view>
+</checkbox-group>
+
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>提示</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      未选择课程！
+    </view>
+  </view>
+</view>
