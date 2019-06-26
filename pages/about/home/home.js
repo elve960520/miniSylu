@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    visitTotal: app.globalData.viewNumber,
-    starCount: app.globalData.starNumber,
+    visitTotal: 0,
+    starCount: 0,
     imageList: ['https://syluCloud.cn/zan'],
     stared: false
   },
@@ -33,28 +33,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let that = this;
-    let i = 0;
-    numDH();
-    function numDH() {
-      if (i < 20) {
-        setTimeout(function () {
-          that.setData({
-            visitTotal: i,
-            starCount: i
-          })
-          i++;
-          numDH();
-        }, 20)
-      } else {
-        that.setData({
-          visitTotal: that.coutNum(that.data.visitTotal),
-          starCount: that.coutNum(that.data.starCount)
-        })
-      }
-    }
-  },
+
   clickStar: function () {
     let that = this;
     if (that.data.stared) {
@@ -84,11 +63,46 @@ Page({
       }
     })
   },
+  onLoad: function (options) {
+    // let that = this;
+    // wx.request({
+    //   url: 'https://sylucloud.cn/getViewAndStar', //第三个函数
+    //   data: {
+    //     xuehao: wx.getStorageSync('xuehao')
+    //   },
+    //   method: 'post',
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     console.log(res.data)
+    //     var star = res.data.stared;
+    //     if (star == null) {
+    //       star = false;
+    //     }
+    //     that.setData({
+    //       visitTotal: res.data.viewNum,
+    //       starCount: res.data.starNum,
+    //       stared: star
+    //     })
+    //   }
+    // })
+  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     let that = this;
+    var tempView = 0;
+    var tempStar = 0;
     wx.request({
       url: 'https://sylucloud.cn/getViewAndStar', //第三个函数
       data: {
@@ -104,21 +118,35 @@ Page({
         if (star == null) {
           star = false;
         }
-
         that.setData({
           visitTotal: res.data.viewNum,
           starCount: res.data.starNum,
           stared: star
         })
+        tempView = that.coutNum(that.data.visitTotal);
+        tempStar = that.coutNum(that.data.starCount);
+        let i = 0;
+        numDH();
+        function numDH() {
+          if (i < 20) {
+            setTimeout(function () {
+              that.setData({
+                visitTotal: i,
+                starCount: i
+              })
+              i++;
+              numDH();
+            }, 20)
+          } else {
+            that.setData({
+              visitTotal: tempView,
+              starCount: tempStar
+            })
+          }
+        }
       }
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+    
   },
 
   /**

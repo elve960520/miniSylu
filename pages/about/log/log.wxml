@@ -7,6 +7,19 @@
   </view>
 </view>
 <view class="cu-timeline">
+  <view class="cu-time">6-26</view>
+  <view class="cu-item">
+    <view class="content">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-cyan">V1.2</view>
+        <view class="cu-tag line-cyan">2019/6/26</view>
+      </view>
+      <view class='margin-top'>
+      1.2（完整版）版本完善了 View 和 Star 的显示，添加计算成绩的全部功能</view>
+      <view>DONE:课程表，成绩，绩点</view>
+      <view>TODO:校园广场，我的社团，蹭课，理工通讯录，人群分布</view>
+    </view>
+  </view>
   <view class="cu-time">6-24</view>
   <view class="cu-item">
     <view class="content">

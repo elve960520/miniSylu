@@ -13,6 +13,7 @@ Page({
     classList: ['公共基础课', '公共选修课', '专业基础课', '专业任选课', '专业方向课', '生产实习', '专业基础选修', '素质教育课', '专业课', '岗位实践', '教学实习', '课程设计', '毕业实习', '毕业设计', '军训', '公共基础选修', '公共基础选修', '生产实习选修', '实践教学环节'],
     markList: [],
     yearIndex: '',
+    selectedAll: false,
     classIndex: [],
     countIndex: [],
     countResult: 0.0
@@ -111,6 +112,51 @@ Page({
     //console.log(e.detail.value)
     that.setData({
       countIndex: e.detail.value
+    })
+  },
+  selectAll: function (e) {
+    var that = this;
+    that.setData({
+      selectedAll: !that.data.selectedAll
+    })
+    var setList = [];
+    var tempList = [];
+    var setCountData = [];
+    var i = 0;
+    var markList = wx.getStorageSync('markArray');
+    if (that.data.yearIndex != "全部") {
+      for (let index = 0; index < markList.length; index++) {
+        let elem = markList[index];
+        if (elem.markYear == that.data.yearIndex) {
+          tempList[i++] = elem;
+        }
+      }
+      markList = tempList;
+    }      
+    i = 0;
+    if (that.data.selectedAll) {
+      for (let indexO = 0; indexO < markList.length; indexO++) {
+        let elem = markList[indexO];
+        if (elem.markValue != '0') {
+          setList[i] = elem;
+          setCountData[i] = elem.markNumber;
+          setList[i++].checked = true;
+        }
+      }
+    }else{
+      for (let indexO = 0; indexO < markList.length; indexO++) {
+        let elem = markList[indexO];
+        if (elem.markValue != '0') {
+          setList[i] = elem;
+          //setCountData[i] = elem.markNumber;
+          setList[i++].checked = false;
+        }
+      }
+    }
+    //console.log(setCountData)
+    that.setData({
+      markList: setList,
+      countIndex: setCountData
     })
   },
 
