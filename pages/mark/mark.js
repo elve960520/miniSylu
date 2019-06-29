@@ -188,6 +188,18 @@ Page({
           wx.stopPullDownRefresh()
         }, 500)
         // this.setMarkList(this.data.multiIndex);
+      }, fail(res){
+        that.setData({
+          loadModal: true,
+          loadtext: "获取失败"
+        })
+        setTimeout(function () {
+          that.setData({
+            loadModal: false,
+            loadtext: ""
+          })
+          wx.stopPullDownRefresh()
+        }, 500)
       }
     })
     

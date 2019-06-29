@@ -174,6 +174,7 @@ Page({
     } else {
       var markList = wx.getStorageSync('markArray');
       var countList = [];
+      var tempCountList = [];
       var i = 0;
       for (let index = 0; index < markList.length; index++) {
         let elem = markList[index];
@@ -183,6 +184,19 @@ Page({
           }
         }
       }
+      i = 0;
+      console.log(countList)
+      tempCountList = countList;
+      for (let index = 0; index < countList.length;index++){
+        let elem = countList[index];
+        for (let indexI = 0; indexI < tempCountList.length;indexI++){
+          let evem = tempCountList[indexI];
+          if(evem.markNumber == elem.markNumber && evem.markValue>elem.markValue){
+            delete countList[index];
+          }
+        }
+      }
+      console.log(countList)
       var countMark = 0, countValue = 0;
       for (let index = 0; index < countList.length; index++) {
         let elem = countList[index];

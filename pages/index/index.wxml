@@ -12,7 +12,7 @@
       </view>
       <view class="cu-form-group ">
         <view class='title'>密码</view>
-        <input placeholder="教学网密码" class='radius ' name='mima' bindinput='setMima' value=''></input>
+        <input placeholder="教学网密码" class='radius' name='mima' bindinput='setMima' value='' password='true' ></input>
       </view>
       <view class="cu-form-group">
         <view style='margin: 0 auto;'>

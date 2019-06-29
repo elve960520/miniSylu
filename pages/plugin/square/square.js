@@ -8,14 +8,77 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
+    isCard: true,
+    squareList: ['新鲜事', '二手物品', '表白墙', '学长答', '考研交流'],
+    tabCur: 1,
+    modalName: '',
+    imgList:'',
+    textareaAValue:''
   },
 
-  bindBack:function (options){
+  bindBack: function (options) {
     wx.switchTab({
       url: '/pages/plugin/home/home',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+
+  tabSelect(e) {
+    console.log(Math.round(new Date()));
+    this.setData({
+      tabCur: e.currentTarget.dataset.id,
+    })
+  },
+
+  ChooseImage() {
+    wx.chooseImage({
+      count: 9, //默认9
+      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], //从相册选择
+      success: (res) => {
+        if (this.data.imgList.length != 0) {
+          this.setData({
+            imgList: this.data.imgList.concat(res.tempFilePaths)
+          })
+        } else {
+          this.setData({
+            imgList: res.tempFilePaths
+          })
+        }
+      }
+    });
+  },
+  ViewImage(e) {
+    wx.previewImage({
+      urls: this.data.imgList,
+      current: e.currentTarget.dataset.url
+    });
+  },
+  DelImg(e) {
+    this.data.imgList.splice(e.currentTarget.dataset.index, 1);
+    this.setData({
+      imgList: this.data.imgList
+    })
+  },
+
+  textareaAInput(e) {
+    this.setData({
+      textareaAValue: e.detail.value
+    })
+  },
+
+  publish: function () {
+    var that = this
+    that.setData({
+      modalName: 'DialogModal'
+    })
+  },
+
+  hideModal(e) {
+    this.setData({
+      modalName: null
     })
   },
 

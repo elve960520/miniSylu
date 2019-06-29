@@ -69,10 +69,14 @@
 <!-- 课程列表 -->
 <scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-  <view class='cu-item' bindtap='selectAll'>
-  <view class='flex-sub'>全选</view>
-    <checkbox class='round cyan'></checkbox>
-  </view>
+    <view class='cu-item' bindtap='selectAll'>
+      <view class='flex-sub'>全选</view>
+      <checkbox class='round cyan' checked='{{selectedAll}}'></checkbox>
+    </view>
+    <!-- <view class='cu-item' bindtap='selectAll'>
+      <view class='flex-sub'>学位课</view>
+      <checkbox class='round cyan'></checkbox>
+    </view> -->
     <checkbox-group class="block" bindchange="checkboxChange">
       <view class='cu-list menu text-left'>
         <view class='cu-item' wx:for="{{classList}}" wx:key>

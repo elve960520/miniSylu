@@ -14,7 +14,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.2",
+	"libVersion": "2.4.0",
 	"appid": "wxe976181001e934f8",
 	"projectname": "syluCloud",
 	"debugOptions": {
