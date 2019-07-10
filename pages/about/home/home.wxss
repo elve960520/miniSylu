@@ -1,1 +1,4 @@
 /* pages/about/about.wxss */
+.cu-list.menu>.cu-item {
+  background:transparent;
+}

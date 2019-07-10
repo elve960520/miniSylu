@@ -69,7 +69,7 @@ Page({
           if (res.data.account) {
             indexPage.setData({
               modalName: 'Modal'
-            })
+            });
             //获取成绩
             wx.request({
               url: 'https://sylucloud.cn/getMark',
@@ -89,7 +89,7 @@ Page({
                   data: res.data,
                 })
               }
-            })
+            });
             //获取课表
             wx.request({
               url: 'https://sylucloud.cn/getSource',
@@ -109,7 +109,8 @@ Page({
                   data: res.data,
                 })
               }
-            })
+            });
+            //获取专业课列表
             setTimeout(function() {
               wx.switchTab({
                 url: '/pages/source/source',

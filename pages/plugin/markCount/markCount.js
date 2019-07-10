@@ -2,20 +2,17 @@
 const app = getApp()
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     modalName: '',
     yearList: ['', '', '', '', ''],
-    classList: ['公共基础课', '公共选修课', '专业基础课', '专业任选课', '专业方向课', '生产实习', '专业基础选修', '素质教育课', '专业课', '岗位实践', '教学实习', '课程设计', '毕业实习', '毕业设计', '军训', '公共基础选修', '公共基础选修', '生产实习选修', '实践教学环节'],
-    markList: [],
     yearIndex: '',
-    selectedAll: false,
-    classIndex: [],
-    countIndex: [],
+    classList: ['全部', '专业课'],
+    classIndex: '',
+    markList: [], //从本地文件获取的无挂科课程
+    showList: [], //显示的列表
+    countList: [], //用于计算的列表
     countResult: 0.0
   },
 
@@ -42,211 +39,160 @@ Page({
   yearChange: function (e) {
     //console.log('radio发生change事件，携带value值为：', e.detail.value)
     var that = this;
-    var markList = wx.getStorageSync('markArray');
+    // var markList = wx.getStorageSync('markArray');
+    var markList = that.data.markList;
     that.setData({
       yearIndex: e.detail.value
     })
     var setList = [];
     var i = 0;
     if (e.detail.value == "全部") {
+      for (let index = 0; index < markList.length; index++) {
+        let elem = markList[index];
+        setList[i] = elem;
+        setList[i++].checked = true;
+      }
       that.setData({
-        markList: markList
+        showList: setList,
+        countList: setList
       })
     } else {
       for (let index = 0; index < markList.length; index++) {
         let elem = markList[index];
-        if (elem.markYear == e.detail.value && elem.markValue != '0') {
+        if (elem.markYear == e.detail.value) {
           setList[i] = elem;
-          setList[i++].checked = false;
+          setList[i++].checked = true;
         }
       }
       that.setData({
-        markList: setList
+        showList: setList,
+        countList: setList
       })
     }
   },
 
-  checkboxChange: function (e) {
-    //console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+  selectSource: function (e) {
     var that = this;
+    console.log(e.detail.value)
+    var countList = [];
+    var showList = that.data.showList;
     that.setData({
       classIndex: e.detail.value
     })
-    var setList = [];
-    var tempList = [];
-    var setCountData = [];
     var i = 0;
-    var markList = wx.getStorageSync('markArray');
-    if (that.data.yearIndex != "全部") {
-      for (let index = 0; index < markList.length; index++) {
-        let elem = markList[index];
-        if (elem.markYear == that.data.yearIndex) {
-          tempList[i++] = elem;
-        }
+    if (e.detail.value == "全部") {
+      for (let index = 0; index < showList.length; index++) {
+        showList[index].checked = true;
       }
-      markList = tempList;
-    }
-    //console.log(markList);
-    i = 0;
-    for (let indexO = 0; indexO < markList.length; indexO++) {
-      let elem = markList[indexO];
-      for (let indexI = 0; indexI < e.detail.value.length; indexI++) {
-        let evem = e.detail.value[indexI];
-        if (elem.markClass == evem && elem.markValue != '0') {
-          setList[i] = elem;
-          setCountData[i] = elem.markNumber;
-          setList[i++].checked = true;
-          continue;
+      that.setData({
+        countList: showList,
+        showList: showList
+      })
+    } else if (e.detail.value == "专业课") {
+      wx.getStorage({
+        key: 'speSourceArray',
+        success(res) {
+          var speSourceList = res.data;
+          var countList = [];
+          for (let index = 0; index < showList.length; index++) {
+            let elem = showList[index];
+            showList[index].checked = false;
+            for (let indexI = 0; indexI < speSourceList.length; indexI++) {
+              let evem = speSourceList[indexI];
+              if (elem.markNumber == evem) {
+                showList[index].checked = true;
+                countList[i++] = elem;
+              }
+            }
+          }
+          that.setData({
+            countList: countList,
+            showList: showList
+          });
+        }, fail(e) {
+          that.setData({
+            modalName: "speSourceModal"
+          })
         }
-      }
+      })
     }
-    //console.log(setCountData)
+  },
+  markChange: function (e) { //选择/取消某个选项
+    var that = this;
+    // console.log(e.detail.value)
+    var eList = e.detail.value;
+    var showList = that.data.showList;
+    var countList = [];
+    var i = 0;
+    for (let index = 0; index < eList.length; index++) {
+      let elem = eList[index];
+      // console.log(Number(elem))
+      countList[i++] = showList[Number(elem)]
+    }
     that.setData({
-      markList: setList,
-      countIndex: setCountData
+      countList: countList
     })
   },
 
-  markChange: function (e) {
-    var that = this;
-    //console.log(e.detail.value)
-    that.setData({
-      countIndex: e.detail.value
-    })
-  },
-  selectAll: function (e) {
-    var that = this;
-    that.setData({
-      selectedAll: !that.data.selectedAll
-    })
-    var setList = [];
-    var tempList = [];
-    var setCountData = [];
-    var i = 0;
-    var markList = wx.getStorageSync('markArray');
-    if (that.data.yearIndex != "全部") {
-      for (let index = 0; index < markList.length; index++) {
-        let elem = markList[index];
-        if (elem.markYear == that.data.yearIndex) {
-          tempList[i++] = elem;
-        }
-      }
-      markList = tempList;
-    }      
-    i = 0;
-    if (that.data.selectedAll) {
-      for (let indexO = 0; indexO < markList.length; indexO++) {
-        let elem = markList[indexO];
-        if (elem.markValue != '0') {
-          setList[i] = elem;
-          setCountData[i] = elem.markNumber;
-          setList[i++].checked = true;
-        }
-      }
-    }else{
-      for (let indexO = 0; indexO < markList.length; indexO++) {
-        let elem = markList[indexO];
-        if (elem.markValue != '0') {
-          setList[i] = elem;
-          //setCountData[i] = elem.markNumber;
-          setList[i++].checked = false;
-        }
-      }
-    }
-    //console.log(setCountData)
-    that.setData({
-      markList: setList,
-      countIndex: setCountData
-    })
-  },
 
   countMark: function () {
     var that = this;
-    var countArry = that.data.countIndex;
-    if (that.data.yearIndex == '') {
+    var countList = that.data.countList;
+    if (countList.length == 0) {
       that.setData({
-        modalName: 'yearModal'
+        modalName: "sourceModal"
       })
-    } else if (countArry.length == 0) {
-      that.setData({
-        modalName: 'sourceModal'
-      })
-    } else {
-      var markList = wx.getStorageSync('markArray');
-      var countList = [];
-      var tempCountList = [];
-      var i = 0;
-      for (let index = 0; index < markList.length; index++) {
-        let elem = markList[index];
-        for (let indexI = 0; indexI < countArry.length; indexI++) {
-          if (elem.markNumber == countArry[indexI] && elem.markValue != '0') {
-            countList[i++] = elem;
-          }
+      return;
+    }
+    console.log(countList);
+    var countArray = [];
+    var flag = false;
+    for (let index = 0; index < countList.length; index++) {
+      let elem = countList[index];
+      flag = false;
+      if (countArray.length == 0) {
+        countArray.push(elem);
+        continue;
+      }
+      for (let indexI = 0; indexI < countArray.length; indexI++) {
+        let evem = countArray[indexI];
+        if (elem.markNumber == evem.markNumber) {
+          flag = true;
+          console.log(elem.markStatus);
+          if (elem.markValue > evem.markValue)
+            countArray[indexI].markValue = elem.markValue;
         }
       }
-      i = 0;
-      console.log(countList)
-      tempCountList = countList;
-      for (let index = 0; index < countList.length;index++){
-        let elem = countList[index];
-        for (let indexI = 0; indexI < tempCountList.length;indexI++){
-          let evem = tempCountList[indexI];
-          if(evem.markNumber == elem.markNumber && evem.markValue>elem.markValue){
-            delete countList[index];
-          }
-        }
-      }
-      console.log(countList)
-      var countMark = 0, countValue = 0;
-      for (let index = 0; index < countList.length; index++) {
-        let elem = countList[index];
-        countMark += parseFloat(elem.markWidget) * parseFloat(elem.markValue);
-        countValue += parseFloat(elem.markWidget);
-      }
-      var averMark = countMark / countValue;
-      console.log(averMark.toFixed(3))
-      that.setData({
-        countResult: averMark.toFixed(2),
-      })
-      var mark = averMark.toFixed(2);
-      var i = 0;
-      showMark();
-      function showMark() {
-        if (i < 2) {
-          setTimeout(function () {
-            that.setData({
-              countResult: i.toFixed(1),
-            })
-            i = i + 0.1
-            //console.log(i)
-            showMark()
-          }, 20)
-        } else {
-          that.setData({
-            countResult: mark,
-          })
-        }
+      if (!flag) {
+        countArray.push(elem)
       }
     }
-  },
-
-  showMark: function () {
-    var that = this;
-    var mark = that.data.countResult;
-    if (i < 20) {
-      setTimeout(function () {
+    var countMark = 0, countValue = 0;
+    for (let index = 0; index < countArray.length; index++) {
+      let elem = countArray[index];
+      countMark += parseFloat(elem.markWidget) * parseFloat(elem.markValue);
+      countValue += parseFloat(elem.markWidget);
+    }
+    var averMark = countMark / countValue;
+    console.log(averMark.toFixed(3))
+    var mark = averMark.toFixed(2);
+    var i = 0;
+    showMark();
+    function showMark() {
+      if (i < 2) {
+        setTimeout(function () {
+          that.setData({
+            countResult: i.toFixed(1),
+          })
+          i = i + 0.1
+          //console.log(i)
+          showMark()
+        }, 20)
+      } else {
         that.setData({
-          visitTotal: i,
-          starCount: i
+          countResult: mark,
         })
-        i++
-        numDH();
-      }, 20)
-    } else {
-      that.setData({
-        visitTotal: that.coutNum(that.data.visitTotal),
-        starCount: that.coutNum(that.data.starCount)
-      })
+      }
     }
   },
 
@@ -254,7 +200,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.request({
+      url: 'https://sylucloud.cn/getSpeSource',
+      data: {
+        xuehao: wx.getStorageSync('xuehao'),
+        mima: wx.getStorageSync('mima')
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'post',
+      success(res) {
+        //wx.hideLoading()
+        console.log(res.data)
+        if (res.data.length != 0) {
+          wx.setStorage({
+            key: 'speSourceArray',
+            data: res.data,
+          })
+        }
+      }
+    });
   },
 
   /**
@@ -264,20 +230,28 @@ Page({
     var xuehao = wx.getStorageSync('xuehao')
     var year = Number(xuehao.slice(0, 2));
     var yearList = [];
-    yearList = ['20' + (year + 3).toString() + '-' + '20' + (year + 4).toString(), '20' + (year + 2).toString() + '-' + '20' + (year + 3).toString(), '20' + (year + 1).toString() + '-' + '20' + (year + 2).toString(), '20' + year.toString() + '-' + '20' + (year + 1).toString(), "全部"];
+    yearList = ['20' + (year + 4).toString() + '-' + '20' + (year + 5).toString(), '20' + (year + 3).toString() + '-' + '20' + (year + 4).toString(), '20' + (year + 2).toString() + '-' + '20' + (year + 3).toString(), '20' + (year + 1).toString() + '-' + '20' + (year + 2).toString(), '20' + year.toString() + '-' + '20' + (year + 1).toString(), "全部"];
     this.setData({
       yearList: yearList
     });
-    // this.setData({
-    //   markList: wx.getStorageSync('markArray')
-    // });
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var markList = wx.getStorageSync('markArray');
+    let tempMarkList = [];
+    let i = 0;
+    for (let index = 0; index < markList.length; index++) {
+      let elem = markList[index];
+      if (elem.markValue != '0') {
+        tempMarkList[i++] = elem;
+      }
+    }
+    this.setData({
+      markList: tempMarkList
+    })
   },
 
   /**

@@ -24,10 +24,10 @@
       <text class='text-grey'>{{item.markStatus}}</text>
     </view>
     <view class='action'>
-      <view class="cu-tag round bg-olive light" wx:if="{{item.markValue>=4}}">{{50+item.markValue*10}}</view>
-      <view class="cu-tag round bg-green light" wx:if="{{item.markValue>=3&&item.markValue<4}}">{{50+item.markValue*10}}</view>
-      <view class="cu-tag round bg-cyan light" wx:if="{{item.markValue>=2&&item.markValue<3}}">{{50+item.markValue*10}}</view>
-      <view class="cu-tag round bg-blue light" wx:if="{{item.markValue>=1&&item.markValue<2}}">{{50+item.markValue*10}}</view>
+      <view class="cu-tag round bg-olive light" wx:if="{{item.markValue>=4}}">{{(50+item.markValue*10)/1}}</view>
+      <view class="cu-tag round bg-green light" wx:if="{{item.markValue>=3&&item.markValue<4}}">{{(50+item.markValue*10)/1}}</view>
+      <view class="cu-tag round bg-cyan light" wx:if="{{item.markValue>=2&&item.markValue<3}}">{{(50+item.markValue*10)/1}}</view>
+      <view class="cu-tag round bg-blue light" wx:if="{{item.markValue>=1&&item.markValue<2}}">{{(50+item.markValue*10)/1}}</view>
       <view class="cu-tag round bg-red light" wx:if="{{item.markValue<1}}">0</view>
     </view>
   </view>

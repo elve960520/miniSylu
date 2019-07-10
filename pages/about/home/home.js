@@ -9,7 +9,8 @@ Page({
     visitTotal: 0,
     starCount: 0,
     imageList: ['https://syluCloud.cn/zan'],
-    stared: false
+    stared: false,
+    name:null
   },
 
   coutNum(e) {
@@ -64,36 +65,16 @@ Page({
     })
   },
   onLoad: function (options) {
-    // let that = this;
-    // wx.request({
-    //   url: 'https://sylucloud.cn/getViewAndStar', //第三个函数
-    //   data: {
-    //     xuehao: wx.getStorageSync('xuehao')
-    //   },
-    //   method: 'post',
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     console.log(res.data)
-    //     var star = res.data.stared;
-    //     if (star == null) {
-    //       star = false;
-    //     }
-    //     that.setData({
-    //       visitTotal: res.data.viewNum,
-    //       starCount: res.data.starNum,
-    //       stared: star
-    //     })
-    //   }
-    // })
+
   },
   
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    this.setData({
+      name: wx.getStorageSync('name')
+    })
   },
 
   /**

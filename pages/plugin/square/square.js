@@ -10,8 +10,8 @@ Page({
     CustomBar: app.globalData.CustomBar,
     isCard: true,
     squareList: ['新鲜事', '二手物品', '表白墙', '学长答', '考研交流'],
-    tabCur: 1,
-    modalName: '',
+    tabCur: 0,
+    modalName: null,
     imgList:'',
     textareaAValue:''
   },
