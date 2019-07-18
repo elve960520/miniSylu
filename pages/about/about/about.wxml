@@ -11,7 +11,7 @@
   <view class='text-content'>
     <view>Hi！同学们~欢迎使用琴湖助手！</view>
     <view class='margin-top-sm'>此小程序是本人开发的一个练手项目，旨在方便同学们查询课表和成绩，如果童鞋们觉得还不错，可以点击右上角...添加到我的小程序，以便下次使用，谢谢</view>
-    <view class='margin-top-sm'>下一步打算添加校园广场和社团功能，将其打造的更完整一些，项目是不收取任何费用的，当然如果你觉得很赞，可以赞赏支持一下，以纪念那些逝去的时间</view>
+    <view class='margin-top-sm'>下一步打算添加我的社团或者理工通讯录功能，将其打造的更完整一些，项目是不收取任何费用的，当然如果你觉得很赞，可以赞赏支持一下，以纪念那些逝去的时间</view>
     <view class='margin-top-sm'>另：如果童鞋们对项目感兴趣，也想成为贡献者或开发者，或者想学习该程序都可以联系我email：elve960520@163.com</view>
     <view class='margin-top-sm'>注：本项目ui框架采用color-ui小程序前端框架，谢谢老板</view>
     <!-- <view class='margin-top-sm'>更多功能敬请期待！</view> -->

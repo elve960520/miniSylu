@@ -103,7 +103,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var checkedAccount = wx.getStorageSync('checkedAccount');
+    wx.getSetting({
+      success: res => {
+        if (!res.authSetting['scope.userInfo'] || !checkedAccount) {
+          wx.redirectTo({
+            url: '/pages/index/index'
+          })
+        }
+      }
+    })
   },
 
   /**

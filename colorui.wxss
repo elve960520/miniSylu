@@ -2132,7 +2132,7 @@ button.icon.lg {
 .cu-card.article>.cu-item .content .text-content {
   font-size: 28rpx;
   color: #888;
-  height: 4.8em;
+  max-height: 6.4em;
   overflow: hidden;
 }
 
@@ -2673,7 +2673,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .justify-between {
-  justify-content: space-between;
+  text-sm: space-between;
 }
 
 .justify-around {

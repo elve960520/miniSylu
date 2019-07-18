@@ -6,11 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    avatarUrl: '../../../images/user-unlogin.png',
     visitTotal: 0,
     starCount: 0,
     imageList: ['https://syluCloud.cn/zan'],
     stared: false,
-    name:null
+    name: null
   },
 
   coutNum(e) {
@@ -64,16 +65,79 @@ Page({
       }
     })
   },
-  onLoad: function (options) {
 
+  setUserImage: function () {
+    var that = this;
+    wx.chooseImage({
+      count: 9, //默认9
+      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], //从相册选择
+      success: (res) => {
+        that.setData({
+          avatarUrl: res.tempFilePaths
+        })
+        console.log(res.tempFilePaths)
+        const filePath = res.tempFilePaths[0];
+        const cloudPath = wx.getStorageSync('xuehao') + filePath.match(/\.[^.]+?$/)[0];
+        wx.cloud.uploadFile({
+          cloudPath,
+          filePath,
+          success: res => {
+            console.log(res);
+            wx.setStorageSync('userImageId', res.fileID)
+          },
+          fail: e => {
+            console.error('[上传文件] 失败：', e)
+          }
+        })
+      }
+    });
   },
-  
+
+  onLoad: function (options) {
+    var that = this;
+    wx.request({
+      url: 'https://sylucloud.cn/setViewNum', //第二个函数
+      data: {
+        xuehao: wx.getStorageSync('xuehao')
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'post',
+      success(res) {
+        //console.log(res.data)
+      }
+    });
+    var checkedAccount = wx.getStorageSync('checkedAccount');
+    wx.getSetting({
+      success: res => {
+        if (!res.authSetting['scope.userInfo'] || !checkedAccount) {
+          wx.redirectTo({
+            url: '/pages/index/index'
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.setData({
-      name: wx.getStorageSync('name')
+    var that = this;
+    wx.cloud.downloadFile({
+      fileID: wx.getStorageSync('userImageId'),
+      success: res => {
+        that.setData({
+          avatarUrl: res.tempFilePath
+        })
+      },
+      fail: err => {
+      }
+    })
+    that.setData({
+      name: wx.getStorageSync('name'),
     })
   },
 
@@ -127,7 +191,7 @@ Page({
         }
       }
     })
-    
+
   },
 
   /**

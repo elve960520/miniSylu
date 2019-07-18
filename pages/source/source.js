@@ -109,6 +109,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    // wx.request({
+    //   url: 'https://sylucloud.cn/getWeekNumber', //第一个函数
+    //   data: {
+    //     xuehao: wx.getStorageSync('xuehao')
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   method: 'post',
+    //   success(res) {
+    //     app.globalData.weekNumber = parseInt(res.data.weekNum);//res.weekNum
+    //     that.setData({
+    //       tabCur: parseInt(res.data.weekNum)
+    //     })
+    //     console.log(parseInt(res.data.weekNum));
+    //   }
+    // });
     // 获取用户信息
     var checkedAccount = wx.getStorageSync('checkedAccount');
     wx.getSetting({

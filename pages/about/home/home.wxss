@@ -2,3 +2,6 @@
 .cu-list.menu>.cu-item {
   background:transparent;
 }
+.bg-white-home{
+  background-color: #fff;
+}

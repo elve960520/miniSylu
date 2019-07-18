@@ -11,7 +11,79 @@
     {{squareList[index]}}
   </view>
 </scroll-view>
-
+<!-- list -->
+<scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="getNewContent" lower-threshold="100" upper-threshold="0" enable-back-to-top bindscrolltoupper="onPullDownScroll">
+  <view class="cu-card dynamic no-card margin-top">
+    <view wx:for="{{contentList}}" wx:key class="cu-item shadow">
+      <view class="cu-list menu menu-avatar" >
+        <view class="cu-item" >
+          <image class="cu-avatar round lg" mode="aspectFill"  src="{{item.userfileID}}"></image>
+          <view class='content flex-sub' >
+            <view>{{item.xingming}}</view>
+            <view class='text-gray text-sm flex justify-between'>
+              {{item.year}}年{{item.month}}月{{item.day}}日
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='padding-left padding-right padding-bottom-sm' style='padding-top:0px; margin-top:0px;word-break:break-word;' wx:if="{{item.text}}">
+      <!-- 此处有问题 -->
+        <text space="ensp" decode="{{true}}" selectable="{{true}}">{{item.text}}    </text>
+      </view>
+      <view class="grid col-3 grid-square flex-sub padding-lr ">
+        <view class="bg-img" wx:for="{{item.fileIdList}}" wx:key wx:for-item="imageItem" bindtap="ViewContentImage" data-list="{{item.fileIdList}}" data-url="{{imageItem}}">
+          <image src='{{imageItem}}' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class="grid col-3 text-center text-grey">
+        <view class="padding" bindtap='setContentLike' data-id="{{item._id}}">
+          <text class="{{item.isLike?'icon-likefill':'icon-like'}} text-lg text-red"></text> {{item.goodCount}}</view>
+        <view class="padding" bindtap='getComment' data-id="{{item._id}}">
+          <text class="icon-comment text-lg text-blue"></text> {{item.commentCount}}</view>
+        <button class="padding shareButton" open-type='share'>
+          <text class="icon-forward text-lg text-green"></text> </button>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<!-- 评论内容 -->
+<view class="cu-modal bottom-modal {{modalName=='commentModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white " bindtap='hideModal'>
+      <view class='action text-gray'>
+        <text class='text-sm'>{{commentCount}}条评论</text> </view>
+      <view class='action text-blue'>
+        <text class="icon-unfold text-lg text-gray"></text>
+      </view>
+    </view>
+    <!-- <view class='padding-xl'> -->
+    <scroll-view scroll-y class='scroll-view-y' style='margin-bottom: 90rpx;'>
+      <view class="cu-list menu menu-avatar comment ">
+        <view class="cu-item" wx:for="{{commentList}}" wx:key>
+          <!-- <view class="cu-avatar round" style="background-image:url(https://image.weilanwl.com/img/square-1.jpg);"></view> -->
+          <image class="cu-avatar round" src="{{item.userfileID}}"></image>
+          <view class='content'>
+            <view class='text-grey text-sm' style='text-align: left;'>{{item.xingming}}</view>
+            <view class='text-gray text-content text-xs ' style='text-align: left;'>
+              {{item.year}}年{{item.month}}月{{item.day}}日
+            </view>
+            <view class='flex justify-between'>
+              <view class='text-balck text-df' style='text-align: left;'>{{item.value}}</view>
+            </view>
+          </view>
+          <view class='top text-gray' style='padding-top:0rpx;margin-top:0rpx;' bindtap='setCommentLike' data-time="{{item.time}}">
+            <text class="icon-appreciate text-lg {{item.isZan?'text-red':'text-gray'}}"> </text> {{item.goodCount}}
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="cu-bar foot input">
+      <input class='solid-bottom comment-input' focus="{{false}}" maxlength="140" cursor-spacing="10" placeholder='发表评论' bindinput="commentInput" value='{{commentValue}}'></input>
+      <button class='cu-btn bg-gradual-blue shadow' bindtap='pushComment'>发送</button>
+    </view>
+    <!-- </view> -->
+  </view>
+</view>
 <!-- 发布选项框 -->
 <view class="round-click bg-gradual-blue cu-btn shadow" bindtap='publish'>
   <text>发布</text>
@@ -26,7 +98,7 @@
     </view>
     <view class="padding-sm padding-bottom-xs">
       <view class="cu-form-group">
-        <textarea class="{{modalName=='DialogModal'?'show':''}}" wx:if="{{modalName!=null}}" bindinput="textareaAInput" placeholder="输入新内容"></textarea>
+        <textarea class="{{modalName=='DialogModal'?'show':''}}" wx:if="{{modalName=='DialogModal'}}" bindinput="textareaAInput" placeholder="输入新内容" value='{{textareaAValue}}'></textarea>
       </view>
     </view>
     <view class="padding-sm padding-top-xs">
@@ -47,7 +119,7 @@
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-blue" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-gradual-blue margin-left" bindtap="hideModal">发布</button>
+        <button class="cu-btn bg-gradual-blue margin-left" bindtap="pushContent">发布</button>
       </view>
     </view>
   </view>

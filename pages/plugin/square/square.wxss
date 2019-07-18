@@ -13,10 +13,10 @@
     z-index: 9;
 }
 .round-click text{
-    font-size: 32rpx;
-    max-width: 80rpx;
-    color: #fff;
-    text-align: center;
+  font-size: 32rpx;
+  max-width: 80rpx;
+  color: #fff;
+  text-align: center;
 }
 
 textarea{
@@ -48,4 +48,30 @@ textarea{
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+}
+.shareButton{
+  background: transparent;
+  height: auto;
+  width: auto;
+  border: none;
+  padding: 0px;
+  margin-top: 5rpx;
+  /* outline: none； */
+}
+.shareButton::after{
+  border: none
+}
+
+.scroll-view-y{
+  height: 900rpx
+}
+.comment-input{
+  text-align: left;
+}
+
+/* .commentModal > .text-content{
+  text-align: left;
+} */
+.top{
+  text-align: top;
 }

@@ -1,4 +1,5 @@
 {
+  "cloud":true,
   "pages": [
     "pages/source/source",
     "pages/mark/mark",

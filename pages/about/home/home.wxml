@@ -3,15 +3,17 @@
   <view class='padding-xl'>
     <view class='cu-list menu menu-avatar'>
       <view class='cu-item'>
-        <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-2.jpg);">
+        <!-- <view class="cu-avatar round lg" style="background-image:url({{avatarUrl}});" bindtap='setUserImage'> -->
           <!-- <view class="cu-tag badge">99+</view> -->
-        </view>
+        <!-- </view> -->
+        <image class="cu-avatar round lg" mode="aspectFill" src="{{avatarUrl}}" bindtap='setUserImage'>
+        </image>
         <view class='content'>
           <view class=' text-white text-xl'>
             {{name}}
           </view>
           <view class='text-white'>
-            琴湖助手 V1.2
+            琴湖助手 V1.3
           </view>
         </view>
       </view>
@@ -38,7 +40,7 @@
     </view>
   </view>
 </view>
-<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+<view class="bg-white-home cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
   <view class="cu-item arrow">
     <navigator class='content' url='../about/about' hover-class='none'>
       <text class='icon-explorefill text-blue'></text>
