@@ -110,23 +110,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // wx.request({
-    //   url: 'https://sylucloud.cn/getWeekNumber', //第一个函数
-    //   data: {
-    //     xuehao: wx.getStorageSync('xuehao')
-    //   },
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   method: 'post',
-    //   success(res) {
-    //     app.globalData.weekNumber = parseInt(res.data.weekNum);//res.weekNum
-    //     that.setData({
-    //       tabCur: parseInt(res.data.weekNum)
-    //     })
-    //     console.log(parseInt(res.data.weekNum));
-    //   }
-    // });
+    
     // 获取用户信息
     var checkedAccount = wx.getStorageSync('checkedAccount');
     wx.getSetting({
@@ -138,6 +122,26 @@ Page({
         }
       }
     })
+    
+    wx.request({
+      url: 'https://sylucloud.cn/getWeekNumber', //第一个函数
+      data: {
+        xuehao: wx.getStorageSync('xuehao')
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'post',
+      success(res) {
+        app.globalData.weekNumber = parseInt(res.data.weekNum);//res.weekNum
+        that.setData({
+          tabCur: parseInt(res.data.weekNum),
+          scrollLeft: (parseInt(res.data.weekNum) - 2) * 115
+        })
+        that.setSourceList(that.data.tabCur - 1);
+        console.log(parseInt(res.data.weekNum));
+      }
+    });
   },
 
   /**
@@ -145,16 +149,16 @@ Page({
    */
   onReady: function () {
     // this.setSourceList(app.globalData.weekNumber);
-    var checkedAccount = wx.getStorageSync('checkedAccount');
-    wx.getSetting({
-      success: res => {
-        if (!res.authSetting['scope.userInfo'] || !checkedAccount) {
-          wx.redirectTo({
-            url: '/pages/index/index'
-          })
-        }
-      }
-    })
+    // var checkedAccount = wx.getStorageSync('checkedAccount');
+    // wx.getSetting({
+    //   success: res => {
+    //     if (!res.authSetting['scope.userInfo'] || !checkedAccount) {
+    //       wx.redirectTo({
+    //         url: '/pages/index/index'
+    //       })
+    //     }
+    //   }
+    // })
     //this.loadProgress();
   },
 
@@ -167,6 +171,7 @@ Page({
       tabCur: app.globalData.weekNumber,
       scrollLeft: (app.globalData.weekNumber-2) * 115
     })
+    this.setSourceList(this.data.tabCur - 1);
   },
 
   /**
