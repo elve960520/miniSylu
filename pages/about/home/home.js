@@ -65,26 +65,38 @@ Page({
       }
     })
   },
-
+  //设置头像
   setUserImage: function () {
     var that = this;
     wx.chooseImage({
       count: 9, //默认9
-      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], //从相册选择
       success: (res) => {
-        that.setData({
-          avatarUrl: res.tempFilePaths
-        })
+
         console.log(res.tempFilePaths)
         const filePath = res.tempFilePaths[0];
-        const cloudPath = wx.getStorageSync('xuehao') + filePath.match(/\.[^.]+?$/)[0];
+        var time = new Date().getTime();
+        const cloudPath = wx.getStorageSync('xuehao') + time + filePath.match(/\.[^.]+?$/)[0];
         wx.cloud.uploadFile({
           cloudPath,
           filePath,
           success: res => {
             console.log(res);
+            that.setData({
+              avatarUrl: res.fileID
+            })
             wx.setStorageSync('userImageId', res.fileID)
+            wx.cloud.callFunction({
+              name:"setUserImage",
+              data:{
+                xuehao:wx.getStorageSync("xuehao"),
+                fileID: res.fileID
+              },
+              success: res => {
+                console.log(res.result)
+              }
+            })
           },
           fail: e => {
             console.error('[上传文件] 失败：', e)
@@ -126,19 +138,33 @@ Page({
    */
   onReady: function () {
     var that = this;
-    wx.cloud.downloadFile({
-      fileID: wx.getStorageSync('userImageId'),
-      success: res => {
-        that.setData({
-          avatarUrl: res.tempFilePath
-        })
-      },
-      fail: err => {
-      }
-    })
     that.setData({
       name: wx.getStorageSync('name'),
     })
+    wx.cloud.callFunction({
+      name:"getUserImage",
+      data: {
+        xuehao: wx.getStorageSync("xuehao"),
+      },
+      success: res => {
+        console.log(res.result)
+        var tempData = res.result.data[0]
+        that.setData({
+          avatarUrl: tempData.fileID
+        })
+        wx.setStorageSync('userImageId', tempData.fileID)
+      }
+    })
+    // wx.cloud.downloadFile({
+    //   fileID: wx.getStorageSync('userImageId'),
+    //   success: res => {
+    //     that.setData({
+    //       avatarUrl: res.tempFilePath
+    //     })
+    //   },
+    //   fail: err => {
+    //   }
+    // })
   },
 
   /**

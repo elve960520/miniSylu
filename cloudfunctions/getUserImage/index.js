@@ -5,15 +5,12 @@ cloud.init({
   env: 'test-elve'
 })
 const db = cloud.database()
+
 // 云函数入口函数
 exports.main = async (event, context) => {
   var data = event;
-  //console.log(data)
-  var contentList =  await db.collection('content').where({
-    tabCur: data.tabCur 
-  }).orderBy('time', 'desc')
-    .skip(data.page*10)
-    .limit(10)
-    .get();
-  return contentList;
+  console.log(data)
+  return await db.collection('userImage').where({
+    xuehao: data.xuehao // 填入当前用户 openid
+  }).get()
 }

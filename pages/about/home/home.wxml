@@ -3,9 +3,6 @@
   <view class='padding-xl'>
     <view class='cu-list menu menu-avatar'>
       <view class='cu-item'>
-        <!-- <view class="cu-avatar round lg" style="background-image:url({{avatarUrl}});" bindtap='setUserImage'> -->
-          <!-- <view class="cu-tag badge">99+</view> -->
-        <!-- </view> -->
         <image class="cu-avatar round lg" mode="aspectFill" src="{{avatarUrl}}" bindtap='setUserImage'>
         </image>
         <view class='content'>

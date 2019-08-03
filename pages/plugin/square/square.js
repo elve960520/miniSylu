@@ -14,6 +14,7 @@ Page({
     isCard: true,
     squareList: ['新鲜事', '二手物品', '表白墙', '学长答', '考研交流'],
     tabCur: 0,
+    commentTo: null,
     contentPage: 0,
     commentPage: 0,
     modalName: null,
@@ -25,15 +26,14 @@ Page({
     fileIdList: [],
     contentList: [],
     commentList: [],
-
   },
 
-  bindBack: function(options) {
+  bindBack: function (options) {
     wx.switchTab({
       url: '/pages/plugin/home/home',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 
@@ -81,7 +81,7 @@ Page({
     })
   },
   //下拉刷新
-  onPullDownScroll: function(e) {
+  onPullDownScroll: function (e) {
     var that = this;
     wx.showLoading({
       title: '获取中',
@@ -91,7 +91,7 @@ Page({
     })
     that.getContent();
   },
-//选择发布图片
+  //选择发布图片
   ChooseImage() {
     var that = this;
     wx.chooseImage({
@@ -145,14 +145,14 @@ Page({
       }
     });
   },
-// 查看发布图片
+  // 查看发布图片
   ViewImage(e) {
     wx.previewImage({
       urls: this.data.imgList,
       current: e.currentTarget.dataset.url
     });
   },
-// 查看内容图片
+  // 查看内容图片
   ViewContentImage(e) {
     //console.log(e)
     wx.previewImage({
@@ -160,7 +160,7 @@ Page({
       current: e.currentTarget.dataset.url
     });
   },
-// 删除图片
+  // 删除图片
   DelImg(e) {
     var that = this;
     //console.log(that.data.fileIdList[e.currentTarget.dataset.index])
@@ -182,7 +182,7 @@ Page({
     })
 
   },
-// 发布输入框
+  // 发布输入框
   textareaAInput(e) {
     this.setData({
       textareaAValue: e.detail.value
@@ -194,7 +194,7 @@ Page({
       commentValue: e.detail.value
     })
   },
-// 发送内容
+  // 发送内容
   pushContent(e) {
     var that = this;
     var imageList = that.data.fileIdList;
@@ -212,7 +212,7 @@ Page({
         time: new Date().getTime(),
         xuehao: wx.getStorageSync("xuehao"),
         xingming: wx.getStorageSync("name"),
-        userfileID: wx.getStorageSync("userImageId"),
+        userImage: wx.getStorageSync("userImageId"),
         fileIdList: that.data.fileIdList,
         tabCur: that.data.tabCur,
         text: that.data.textareaAValue,
@@ -237,10 +237,10 @@ Page({
       fail: err => {
         console.log(err)
       },
-      complete: () => {}
+      complete: () => { }
     })
   },
-// 评论给内容
+  // 评论给内容
   pushComment(e) {
     var that = this;
     if (that.data.commentValue == "") {
@@ -256,7 +256,8 @@ Page({
         value: that.data.commentValue,
         xuehao: wx.getStorageSync("xuehao"),
         xingming: wx.getStorageSync("name"),
-        userfileID: wx.getStorageSync("userImageId"),
+        userImage: wx.getStorageSync("userImageId"),
+        commentTo: that.data.commentTo,
         time: new Date().getTime(),
         goodList: [],
         goodCount: 0
@@ -276,7 +277,9 @@ Page({
               commentList[index].year = that.formatDateTime(commentList[index].time, 'yyyy');
               commentList[index].month = that.formatDateTime(commentList[index].time, 'MM');
               commentList[index].day = that.formatDateTime(commentList[index].time, 'dd');
-
+              commentList[index].hour = that.formatDateTime(commentList[index].time, 'HH');
+              commentList[index].minute = that.formatDateTime(commentList[index].time, 'ss');
+              commentList[index].isZan = commentList[index].goodList.includes(wx.getStorageSync("xuehao"))
             }
             that.setData({
               commentList: res.result,
@@ -299,8 +302,15 @@ Page({
       }
     })
   },
-// 获取内容
-  getContent: function() {
+  //回复某人
+  commentToOne: function (e) {
+    console.log(e)
+    this.setData({
+      commentTo: e.currentTarget.dataset.name
+    })
+  },
+  // 获取内容
+  getContent: function () {
     var that = this;
     wx.cloud.callFunction({
       name: "getContent",
@@ -310,16 +320,23 @@ Page({
         page: that.data.contentPage
       },
       success: res => {
+        that.setData({
+          contentList: []
+        })
         //console.log(res)
         let xuehao = wx.getStorageSync("xuehao")
         var contentList = res.result.data;
+        var userFileId;
         for (let index = 0; index < contentList.length; index++) {
           var time = contentList[index].time;
           contentList[index].year = that.formatDateTime(time, 'yyyy');
           contentList[index].month = that.formatDateTime(time, 'MM');
           contentList[index].day = that.formatDateTime(time, 'dd');
+          contentList[index].hour = that.formatDateTime(time, 'HH');
+          contentList[index].minute = that.formatDateTime(time, 'ss');
           contentList[index].commentCount = contentList[index].commentList.length;
           //console.log(contentList[index].goodList)
+          //设置喜欢
           contentList[index].isLike = false;
           for (let elem in contentList[index].goodList) {
             //console.log(contentList[index].goodList[elem])
@@ -332,10 +349,12 @@ Page({
         that.setData({
           contentList: contentList
         })
+
         wx.hideLoading();
       },
+
       fail: err => {
-        //console.log(err)
+        console.log(err)
       },
       complete: () => {
 
@@ -354,7 +373,8 @@ Page({
     })
     var id = e.currentTarget.dataset.id;
     that.setData({
-      commentId: e.currentTarget.dataset.id
+      commentId: e.currentTarget.dataset.id,
+      commentTo:null
     })
     wx.cloud.callFunction({
       name: "getComment",
@@ -369,6 +389,8 @@ Page({
           commentList[index].year = that.formatDateTime(commentList[index].time, 'yyyy');
           commentList[index].month = that.formatDateTime(commentList[index].time, 'MM');
           commentList[index].day = that.formatDateTime(commentList[index].time, 'dd');
+          commentList[index].hour = that.formatDateTime(commentList[index].time, 'HH');
+          commentList[index].minute = that.formatDateTime(commentList[index].time, 'ss');
           commentList[index].isZan = commentList[index].goodList.includes(wx.getStorageSync("xuehao"))
         }
         wx.hideLoading();
@@ -388,14 +410,14 @@ Page({
     })
   },
   // 分享界面
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return {
       title: '转发',
-      success: function(res) {}
+      success: function (res) { }
     }
   },
   // 点击喜欢
-  setContentLike: function(e) {
+  setContentLike: function (e) {
     var that = this;
     //console.log(e.currentTarget.dataset.id);
     var id = e.currentTarget.dataset.id;
@@ -417,7 +439,7 @@ Page({
           contentList[index].goodCount = contentList[index].goodCount + 1;
 
         }
-        
+
         break;
       }
     }
@@ -514,13 +536,13 @@ Page({
   },
 
   // 点击发布按钮
-  publish: function() {
+  publish: function () {
     var that = this
     that.setData({
       modalName: 'DialogModal'
     })
   },
-// 隐藏弹窗
+  // 隐藏弹窗
   hideModal(e) {
     this.setData({
       modalName: null
@@ -530,7 +552,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     function compareVersion(v1, v2) {
       v1 = v1.split('.')
       v2 = v2.split('.')
@@ -568,7 +590,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     // function getLocalTime(nS) {
     //   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
     // }
@@ -587,7 +609,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     var that = this;
     wx.showLoading({
       title: '加载中...',
@@ -599,35 +621,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

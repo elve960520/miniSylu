@@ -11,7 +11,8 @@
 		"newFeature": true,
 		"autoAudits": false,
 		"uglifyFileName": true,
-		"checkInvalidKey": true
+		"checkInvalidKey": true,
+		"checkSiteMap": false
 	},
 	"compileType": "miniprogram",
 	"cloudfunctionRoot": "cloudfunctions/",

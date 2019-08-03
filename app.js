@@ -15,7 +15,7 @@ App({
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
       wx.cloud.init({
-        env: 'release-elve',
+        env: 'test-elve',
         traceUser: true,
       })
     }
@@ -41,6 +41,32 @@ App({
   onShow(options) {
     // Do something when show.
     let that = this
+    wx.request({
+      url: 'https://sylucloud.cn/checkStudentAccount',
+      data: {
+        xuehao: wx.getStorageSync("xuehao"),
+        mima: wx.getStorageSync("mima")
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'post',
+      success(res) {
+        wx.hideLoading()
+        console.log(res.data)
+        if (res.data.account) { 
+        } else {
+          wx.showLoading({
+            title: '验证错误...',
+          })
+          setTimeout(function(){
+            wx.redirectTo({
+              url: '/pages/index/index'
+            })
+          },1500)
+        }
+      }
+    })
   },
   onHide() {
     // Do something when hide.
