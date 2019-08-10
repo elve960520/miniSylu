@@ -1,4 +1,4 @@
-// pages/plugin/home/home.js
+// pages/plugin/contacts/contacts.js
 const app = getApp()
 Page({
 
@@ -8,14 +8,13 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    remindCount:0
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
 
   },
 
@@ -30,20 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    wx.cloud.callFunction({
-      name: "getRemind",
-      data: {
-        xuehao: wx.getStorageSync("xuehao")
-      },
-      success: res => {
-        var data = res.result.data[0]
-        console.log(data)
-        that.setData({
-          remindCount: data.commentList.length + data.contentLikeList.length + data.commentLikeList.length
-        })
-      }
-    })
+
   },
 
   /**

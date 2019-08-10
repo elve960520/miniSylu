@@ -11,6 +11,15 @@
     {{squareList[index]}}
   </view>
 </scroll-view>
+<!-- 未读 -->
+<view class="bg-white-home cu-list menu card-menu margin-top" wx:if="{{remindCount>0}}">
+  <view class="cu-item arrow">
+    <navigator class='content' url='./remindList/remindList' hover-class='none'>
+      <!-- <text class='icon-explorefill text-blue'></text> -->
+      <text class='text-grey'>{{remindCount}}条未读消息</text>
+    </navigator>
+  </view>
+</view>
 <!-- list -->
 <scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="getNewContent" lower-threshold="100" upper-threshold="0" enable-back-to-top bindscrolltoupper="onPullDownScroll">
   <view class="cu-card dynamic no-card margin-top">

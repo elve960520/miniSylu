@@ -1,5 +1,5 @@
 {
-  "cloud":true,
+  "cloud": true,
   "pages": [
     "pages/source/source",
     "pages/mark/mark",
@@ -12,7 +12,10 @@
     "pages/plugin/square/square",
     "pages/plugin/markCount/markCount",
     "pages/plugin/freeSource/freeSource",
-    "pages/plugin/myAssociation/myAssociation"
+    "pages/plugin/myAssociation/myAssociation",
+    "pages/about/instructions/instructions",
+    "pages/plugin/contacts/contacts",
+    "pages/plugin/square/remindList/remindList"
   ],
   "window": {
     "backgroundTextStyle": "light",

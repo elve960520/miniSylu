@@ -1,0 +1,30 @@
+<!--pages/plugin/square/remindList/remindList.wxml-->
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class='action' bindtap='bindBack' hover-class="none">
+      <text class='icon-back'></text>消息列表
+    </view>
+  </view>
+</view>
+
+<view class="cu-list menu sm-border margin-top card-menu margin-bottom">
+  <view class="cu-item " >
+    <view class='content'>
+      <text wx:for="{{contentLikeList}}" wx:key> {{item.xingming}} </text>给你的帖子点了赞
+    </view>
+  </view>
+</view>
+<view class="cu-list menu sm-border margin-top card-menu margin-bottom">
+  <view class="cu-item " >
+    <view class='content'>
+      <text wx:for="{{commentLikeList}}" wx:key> {{item.xingming}} </text>给你的评论点了赞
+    </view>
+  </view>
+</view>
+<view class="cu-list menu sm-border margin-top card-menu margin-bottom">
+  <view class="cu-item " wx:for="{{commentList}}" wx:key>
+    <view class='content'>
+      <text >{{item.xingming}}评论了你：{{item.comment}}</text>
+    </view>
+  </view>
+</view>

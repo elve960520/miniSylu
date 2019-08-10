@@ -8,6 +8,8 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   var data = event;
+
+
   var contentList = await db.collection('content').where({
     _id: data.id // 填入当前用户 openid
   }).get()
@@ -21,6 +23,14 @@ exports.main = async (event, context) => {
   }else{
     goodList.push(data.xuehao);
     goodCount = goodCount + 1;
+    //设置未读列表
+    await cloud.callFunction({
+      name: 'setRemind',
+      data: {
+        origin: "setContentLike",
+        message: data
+      }
+    })
   }
 
   console.log(goodList)

@@ -10,6 +10,15 @@ exports.main = async (event, context) => {
   // const wxContext = cloud.getWXContext()
   var data = event;
 
+  //设置未读列表
+  await cloud.callFunction({
+    name: 'setRemind',
+    data: {
+      origin:"publishComment",
+      message:data
+    }
+  })
+
   var contentList = await db.collection('content').where({
     _id: data.id // 填入当前用户 openid
   }).get()
@@ -20,6 +29,7 @@ exports.main = async (event, context) => {
   commentList.push(data)
   console.log(commentList)
   var commentCount = commentList.length;
+
   return await db.collection('content').where({
     _id: data.id
   })

@@ -57,6 +57,12 @@
     </view>
   </view>
   <view class="cu-item arrow">
+    <navigator class='content' url='../instructions/instructions' hover-class='none'>
+      <text class='icon-creativefill text-yellow'></text>
+      <text class='text-grey'>使用说明</text>
+    </navigator>
+  </view>
+  <view class="cu-item arrow">
     <navigator class='content' url='../opinion/opinion' hover-class='none'>
       <text class='icon-writefill text-cyan'></text>
       <text class='text-grey'>意见反馈</text>

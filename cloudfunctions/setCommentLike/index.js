@@ -8,8 +8,10 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   var data = event;
+
+
   var contentList = await db.collection('content').where({
-    _id: data.contentId // 填入当前用户 openid
+    _id: data.id // 填入当前用户 openid
   }).get()
   var contentList = contentList.data[0];
   commentList = contentList.commentList;
@@ -24,6 +26,14 @@ exports.main = async (event, context) => {
       } else {
         goodList.push(data.xuehao);
         goodCount = goodCount + 1;
+        //设置未读列表
+        await cloud.callFunction({
+          name: 'setRemind',
+          data: {
+            origin: "setCommentLike",
+            message: data
+          }
+        })
       }
       commentList[index].goodList = goodList;
       commentList[index].goodCount = goodCount;
@@ -31,8 +41,10 @@ exports.main = async (event, context) => {
     }
   }
   console.log(commentList)
+
+  
   return await db.collection('content').where({
-    _id: data.contentId
+    _id: data.id
   })
     .update({
       data: {

@@ -70,17 +70,16 @@ exports.main = async (event, context) => {
     for (let i = 0; i < commentList.length;i++){
       if (commentList[i].xuehao == data.xuehao){
         commentList[i].userImage = data.fileID
-        await db.collection('content').where({
-          _id: elem._id
-        })
-          .update({
-            data:{
-              commentList: commentList
-            }
-          })
-        break;
       }
     }
+    await db.collection('content').where({
+      _id: elem._id
+    })
+      .update({
+        data: {
+          commentList: commentList
+        }
+      })
   }
   // const res = await cloud.callFunction({
   //   // 要调用的云函数名称

@@ -1,6 +1,6 @@
 // pages/square/square.js
 const app = getApp()
-const db = wx.cloud.database()
+// const db = wx.cloud.database()
 Page({
 
   /**
@@ -26,6 +26,7 @@ Page({
     fileIdList: [],
     contentList: [],
     commentList: [],
+    remindCount: 0
   },
 
   bindBack: function (options) {
@@ -35,6 +36,9 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
+    // wx.navigateBack({
+    //   delta: 1
+    // })
   },
 
   tabSelect(e) {
@@ -240,7 +244,7 @@ Page({
       complete: () => { }
     })
   },
-  // 评论给内容
+  // 评论内容
   pushComment(e) {
     var that = this;
     if (that.data.commentValue == "") {
@@ -281,9 +285,10 @@ Page({
               commentList[index].minute = that.formatDateTime(commentList[index].time, 'ss');
               commentList[index].isZan = commentList[index].goodList.includes(wx.getStorageSync("xuehao"))
             }
+            commentList.sort(that.sortNumber);
             that.setData({
-              commentList: res.result,
-              commentCount: res.result.length,
+              commentList: commentList,
+              commentCount: commentList.length,
               commentValue: ""
             })
             wx.hideLoading()
@@ -371,11 +376,12 @@ Page({
     wx.showLoading({
       title: '加载评论...',
     })
-    var id = e.currentTarget.dataset.id;
+    var id = e.currentTarget.dataset.id;//获取帖子 id
     that.setData({
       commentId: e.currentTarget.dataset.id,
       commentTo:null
     })
+    // console.log(id)
     wx.cloud.callFunction({
       name: "getComment",
       data: {
@@ -447,6 +453,7 @@ Page({
       name: "setContentLike",
       data: {
         xuehao: wx.getStorageSync("xuehao"),
+        xingming:wx.getStorageSync("name"),
         id: id,
       }
     })
@@ -477,7 +484,8 @@ Page({
       name: "setCommentLike",
       data: {
         xuehao: wx.getStorageSync("xuehao"),
-        contentId: that.data.commentId,
+        xingming:wx.getStorageSync("name"),
+        id: that.data.commentId,
         commentTime: e.currentTarget.dataset.time
       }
     })
@@ -615,6 +623,20 @@ Page({
       title: '加载中...',
     })
     that.getContent();
+
+    wx.cloud.callFunction({
+      name: "getRemind",
+      data: {
+        xuehao: wx.getStorageSync("xuehao")
+      },
+      success: res => {
+        var data = res.result.data[0]
+        console.log(data)
+        that.setData({
+          remindCount: data.commentList.length + data.contentLikeList.length + data.commentLikeList.length
+        })
+      }
+    })
 
   },
 
