@@ -5,19 +5,24 @@
 </view>
 <view class="margin-xl padding-xl bg-white radius shadow-lg">
   <view class="flex justify-center">
-    <form >
+    <form>
       <view class="cu-form-group">
         <view class='title'>学号</view>
         <input placeholder="教学网学号" class='radius' name='xuehao' bindinput='setXuehao' value=''></input>
       </view>
       <view class="cu-form-group ">
         <view class='title'>密码</view>
-        <input placeholder="教学网密码" class='radius' name='mima' bindinput='setMima' value='' password='true' ></input>
+        <input placeholder="教学网密码" class='radius' name='mima' bindinput='setMima' value='' password='true'></input>
       </view>
       <view class="cu-form-group">
         <view style='margin: 0 auto;'>
           <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'>
             绑定教学网账号
+          </button>
+        </view>
+        <view>
+          <button class='cu-btn round bg-blue shadow'>
+            <navigator target="miniProgram" open-type="exit">退出</navigator>
           </button>
         </view>
       </view>
