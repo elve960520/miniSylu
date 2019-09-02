@@ -6,3 +6,75 @@
     </view>
   </view>
 </view>
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class='action'>
+    <text class='icon-title text-orange '></text> 登录机制
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item ">
+    <view class='content padding-top padding-bottom'>
+      <text decode>&emsp;&emsp;琴湖助手采用一次登录多次验证模式，既当用户第一次使用时会进行教学网验证，验证通过后会将学号和密码保存到本地；在每次打开琴湖助手时候会进行一次服务器验证，以确保学号密码正确，否则会提示进行重新登录\n&emsp;&emsp;注：若需要重新登录可以在微信界面左滑“删除”后，重新搜索“琴湖助手”</text>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+  <view class='action'>
+    <text class='icon-title text-orange '></text> 获取课表
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item ">
+    <view class='content padding-top padding-bottom'>
+      <text decode>&emsp;&emsp;“琴湖助手”会在每次打开小程序时通过教学网获取本学期课表，当此账号曾经获取过后服务器会优先将上次获取内容下发到小程序，如果有更新不到位可以刷新一下小程序</text>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+  <view class='action'>
+    <text class='icon-title text-orange '></text> 获取成绩
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item ">
+    <view class='content padding-top padding-bottom'>
+      <text decode>&emsp;&emsp;成绩页面通过爬取教学网历年成绩进行显示，支持页面下拉刷新，可以在“成绩”页面通过下拉刷新获取最新成绩，成绩页面在每次加载时候都会进行一次获取</text>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+  <view class='action'>
+    <text class='icon-title text-orange '></text> 校园广场
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item ">
+    <view class='content padding-top padding-bottom'>
+      <text decode>&emsp;&emsp;“琴湖助手”重磅打造校园微生态圈--校园广场，同学可以通过发帖来进行二手物品交换或问题询问，通过“校园广场”页面“发布”按钮，同学可以发布新内容，同样，针对已有内容可以进行评论，点赞等操作</text>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+  <view class='action'>
+    <text class='icon-title text-orange '></text> 成绩计算
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item ">
+    <view class='content padding-top padding-bottom'>
+      <text decode>&emsp;&emsp;成绩计算目前已经修改掉了已知 bug，在同学打开本页面后会进行专业课获取，大约在提交请求后三分钟能够获取完成，所以同学<text class="text-red">在打开本页后如果提示三分钟后重试的话就不要着急多次获取/计算专业课，等三分钟后即可</text>，但是如果本班有同学已经使用专业课情况下，则不用重复获取，直接使用即可</text>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+  <view class='action'>
+    <text class='icon-title text-orange '></text> BUG 反馈
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item ">
+    <view class='content padding-top padding-bottom'>
+      <text decode>&emsp;&emsp;由于本小程序是我自己一个人维护的，所以有 bug 在所难免，希望同学们通过“关于”页面“BUG 反馈”页面积极反馈，我都会看到。还有如果版本更新/BUG修改慢的话也稍安勿躁，毕竟我还有正常学业和项目，谢谢老铁们了</text>
+    </view>
+  </view>
+</view>

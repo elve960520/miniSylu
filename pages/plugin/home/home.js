@@ -39,9 +39,12 @@ Page({
       success: res => {
         var data = res.result.data[0]
         console.log(data)
-        that.setData({
+        if(data){
+          that.setData({
           remindCount: data.commentList.length + data.contentLikeList.length + data.commentLikeList.length
         })
+        }
+        
       }
     })
   },

@@ -313,6 +313,7 @@ Page({
     this.setData({
       commentTo: e.currentTarget.dataset.name
     })
+    
   },
   // 获取内容
   getContent: function () {
@@ -550,6 +551,17 @@ Page({
       modalName: 'DialogModal'
     })
   },
+
+  lookContent: function (options) {
+    var that = this
+    // console.log(options)
+    var id = options.currentTarget.dataset.id;
+    console.log(id)
+    wx.navigateTo({
+      url: './content/content?id=' + id
+    })
+  },
+
   // 隐藏弹窗
   hideModal(e) {
     this.setData({
@@ -557,6 +569,11 @@ Page({
     })
   },
 
+  // share:function(){
+  //   wx.showShareMenu({
+  //     withShareTicket: false
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -602,6 +619,7 @@ Page({
     // function getLocalTime(nS) {
     //   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
     // }
+    var that = this;
     var checkedAccount = wx.getStorageSync('checkedAccount');
     wx.getSetting({
       success: res => {
@@ -612,6 +630,10 @@ Page({
         }
       }
     })
+    wx.showLoading({
+      title: '加载中...',
+    })
+    that.getContent();
   },
 
   /**
@@ -619,11 +641,6 @@ Page({
    */
   onShow: function () {
     var that = this;
-    wx.showLoading({
-      title: '加载中...',
-    })
-    that.getContent();
-
     wx.cloud.callFunction({
       name: "getRemind",
       data: {
@@ -632,9 +649,12 @@ Page({
       success: res => {
         var data = res.result.data[0]
         console.log(data)
-        that.setData({
+        if(data){
+          that.setData({
           remindCount: data.commentList.length + data.contentLikeList.length + data.commentLikeList.length
         })
+        }
+        
       }
     })
 

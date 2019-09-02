@@ -12,7 +12,7 @@
   </view>
 </scroll-view>
 <!-- 未读 -->
-<view class="bg-white-home cu-list menu card-menu margin-top" wx:if="{{remindCount>0}}">
+<view class="bg-white-home cu-list menu card-menu margin-top margin-bottom" wx:if="{{remindCount>0}}">
   <view class="cu-item arrow">
     <navigator class='content' url='./remindList/remindList' hover-class='none'>
       <!-- <text class='icon-explorefill text-blue'></text> -->
@@ -21,10 +21,10 @@
   </view>
 </view>
 <!-- list -->
-<scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="getNewContent" lower-threshold="100" upper-threshold="0" enable-back-to-top bindscrolltoupper="onPullDownScroll">
-  <view class="cu-card dynamic no-card margin-top">
-    <view wx:for="{{contentList}}" wx:key class="cu-item shadow">
-      <view class="cu-list menu menu-avatar" >
+<scroll-view scroll-y style="height: {{remindCount>0?windowHeight-90:windowHeight}}px;" bindscrolltolower="getNewContent" lower-threshold="100" upper-threshold="0" enable-back-to-top bindscrolltoupper="onPullDownScroll">
+  <view class="cu-card dynamic no-card {{remindCount>0?'':'margin-top'}}">
+    <view wx:for="{{contentList}}" wx:key class="cu-item shadow" >
+      <view class="cu-list menu menu-avatar" bindtap="lookContent" data-id="{{item._id}}">
         <view class="cu-item" >
           <image class="cu-avatar round lg" mode="aspectFill"  src="{{item.userImage}}"></image>
           <view class='content flex-sub' >
@@ -35,20 +35,20 @@
           </view>
         </view>
       </view>
-      <view class='padding-left padding-right padding-bottom-sm' style='padding-top:0px; margin-top:0px;word-break:break-word;' wx:if="{{item.text}}">
+      <view class='padding-left padding-right padding-bottom-sm' style='padding-top:0px; margin-top:0px;word-break:break-word;' wx:if="{{item.text}}" bindtap="lookContent" data-id="{{item._id}}">
         <text space="ensp" decode="{{true}}" selectable="{{true}}">{{item.text}}    </text>
       </view>
-      <view class="grid col-3 grid-square flex-sub padding-lr ">
-        <view class="bg-img" wx:for="{{item.fileIdList}}" wx:key wx:for-item="imageItem" bindtap="ViewContentImage" data-list="{{item.fileIdList}}" data-url="{{imageItem}}">
+      <view class="grid col-3 grid-square flex-sub padding-lr " bindtap="lookContent" data-id="{{item._id}}">
+        <view class="bg-img" wx:for="{{item.fileIdList}}" wx:key wx:for-item="imageItem" catchtap="ViewContentImage" data-list="{{item.fileIdList}}" data-url="{{imageItem}}">
           <image src='{{imageItem}}' mode='aspectFill' lazy-load='true'></image>
         </view>
       </view>
       <view class="grid col-3 text-center text-grey">
-        <view class="padding" bindtap='setContentLike' data-id="{{item._id}}">
+        <view class="padding" catchtap='setContentLike' data-id="{{item._id}}">
           <text class="{{item.isLike?'icon-likefill':'icon-like'}} text-lg text-red"></text> {{item.goodCount}}</view>
-        <view class="padding" bindtap='getComment' data-id="{{item._id}}">
+        <view class="padding" catchtap='getComment' data-id="{{item._id}}">
           <text class="icon-comment text-lg text-blue"></text> {{item.commentCount}}</view>
-        <button class="padding shareButton" open-type='share'>
+        <button class="padding shareButton" open-type='share' >
           <text class="icon-forward text-lg text-green"></text> </button>
       </view>
     </view>
@@ -69,7 +69,7 @@
       <view class="cu-list menu menu-avatar comment ">
         <view class="cu-item" wx:for="{{commentList}}" wx:key >
           <!-- <view class="cu-avatar round" style="background-image:url(https://image.weilanwl.com/img/square-1.jpg);"></view> -->
-          <image class="cu-avatar round" src="{{item.userImage}}"></image>
+          <image class="cu-avatar round" mode="aspectFill"  src="{{item.userImage}}"></image>
           <view class='content' bindtap="commentToOne" data-name="{{item.xingming}}" data-time="{{item.time}}">
             <view class='text-grey text-sm' style='text-align: left;'>{{item.xingming}} <text wx:if="{{item.commentTo}}"> 回复 {{item.commentTo}}</text> :</view>
             <view class='text-gray text-content text-xs ' style='text-align: left;'>

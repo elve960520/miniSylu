@@ -15,7 +15,8 @@
     "pages/plugin/myAssociation/myAssociation",
     "pages/about/instructions/instructions",
     "pages/plugin/contacts/contacts",
-    "pages/plugin/square/remindList/remindList"
+    "pages/plugin/square/remindList/remindList",
+    "pages/plugin/square/content/content"
   ],
   "window": {
     "backgroundTextStyle": "light",

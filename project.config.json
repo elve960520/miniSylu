@@ -16,7 +16,7 @@
 	},
 	"compileType": "miniprogram",
 	"cloudfunctionRoot": "cloudfunctions/",
-	"libVersion": "2.4.0",
+	"libVersion": "2.4.4",
 	"appid": "wxe976181001e934f8",
 	"projectname": "syluCloud",
 	"debugOptions": {

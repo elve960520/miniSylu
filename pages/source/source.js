@@ -41,7 +41,8 @@ Page({
               color: '',
               sourceName: tempSource.sourceName,
               sourceClassRoom: tempSource.sourceClassRoom,
-              sourceTeacher: tempSource.sourceTeacher
+              sourceTeacher: tempSource.sourceTeacher,
+              sourceId:tempSource.sourceId
             }
           } else if (tempSource.sourceTime == 3) {
             tempSource34[tempSource.sourceWeekDay - 1] = {
@@ -49,7 +50,8 @@ Page({
               color: '',
               sourceName: tempSource.sourceName,
               sourceClassRoom: tempSource.sourceClassRoom,
-              sourceTeacher: tempSource.sourceTeacher
+              sourceTeacher: tempSource.sourceTeacher,
+              sourceId: tempSource.sourceId
             }
           } else if (tempSource.sourceTime == 5) {
             tempSource56[tempSource.sourceWeekDay - 1] = {
@@ -57,7 +59,8 @@ Page({
               color: '',
               sourceName: tempSource.sourceName,
               sourceClassRoom: tempSource.sourceClassRoom,
-              sourceTeacher: tempSource.sourceTeacher
+              sourceTeacher: tempSource.sourceTeacher,
+              sourceId: tempSource.sourceId
             }
           } else if (tempSource.sourceTime == 7) {
             tempSource78[tempSource.sourceWeekDay - 1] = {
@@ -65,7 +68,8 @@ Page({
               color: '',
               sourceName: tempSource.sourceName,
               sourceClassRoom: tempSource.sourceClassRoom,
-              sourceTeacher: tempSource.sourceTeacher
+              sourceTeacher: tempSource.sourceTeacher,
+              sourceId: tempSource.sourceId
             }
           } else if (tempSource.sourceTime == 9) {
             tempSource910[tempSource.sourceWeekDay - 1] = {
@@ -73,7 +77,8 @@ Page({
               color: '',
               sourceName: tempSource.sourceName,
               sourceClassRoom: tempSource.sourceClassRoom,
-              sourceTeacher: tempSource.sourceTeacher
+              sourceTeacher: tempSource.sourceTeacher,
+              sourceId: tempSource.sourceId
             }
           }
         }
@@ -104,6 +109,27 @@ Page({
         loadProgress: 0
       })
     }
+  },
+  showInfo(e) {
+    // console.log(e)
+    var id = e.currentTarget.dataset.id;
+    var sourceList = wx.getStorageSync("sourceArray");
+    var item;
+    for(item in sourceList){
+      if (sourceList[item].sourceId == id){
+        var source = sourceList[item]
+      }
+    }
+    this.setData({
+      modalName: "Modal",
+      source:source
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null,
+      source:null
+    })
   },
   /**
    * 生命周期函数--监听页面加载

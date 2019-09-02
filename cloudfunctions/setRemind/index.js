@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env: 'test-elve'
+  env: 'release-elve'
 })
 const db = cloud.database()
 // 云函数入口函数
@@ -42,7 +42,7 @@ exports.main = async (event, context) => {
     }
     var commentList = remind.data[0].commentList
     commentList.push(insertData)
-    // if (contentXuehao != data.message.xuehao)
+    if (contentXuehao != data.message.xuehao)
     await db.collection("remind").where({
       xuehao: contentXuehao
     })
@@ -62,7 +62,7 @@ exports.main = async (event, context) => {
     }
     var contentLikeList = remind.data[0].contentLikeList
     contentLikeList.push(insertData)
-    // if (contentXuehao != data.message.xuehao)
+    if (contentXuehao != data.message.xuehao)
     await db.collection("remind").where({
       xuehao: contentXuehao
     })
@@ -94,7 +94,7 @@ exports.main = async (event, context) => {
     }
     var commentLikeList = remind.data[0].commentLikeList
     commentLikeList.push(insertData)
-    // if (commentXuehao != data.message.xuehao)
+    if (commentXuehao != data.message.xuehao)
     await db.collection("remind").where({
       xuehao: commentXuehao
     })

@@ -21,13 +21,13 @@
   </view>
 </view>
 <view class="cu-list grid col-{{gridCol}} ">
-  <view class="cu-item " wx:for="{{source12}}" wx:key wx:if="{{index<gridCol}}"> 
+  <view class="cu-item " wx:for="{{source12}}" wx:key wx:if="{{index<gridCol}}" bindtap="showInfo" data-id="{{item.sourceId}}"> 
     <text>{{item.sourceName}}</text>
     <text >{{item.sourceClassRoom}}</text>
   </view>
 </view>
-<view class="cu-list grid col-{{gridCol}} ">
-  <view class="cu-item " wx:for="{{source34}}" wx:key wx:if="{{index<gridCol}}"> 
+<view class="cu-list grid col-{{gridCol}}">
+  <view class="cu-item " wx:for="{{source34}}" wx:key wx:if="{{index<gridCol}}" bindtap="showInfo" data-id="{{item.sourceId}}"> 
     <text>{{item.sourceName}}</text>
     <text >{{item.sourceClassRoom}}</text>
   </view>
@@ -38,20 +38,37 @@
   </view>
 </view>
 <view class="cu-list grid col-{{gridCol}} solid-top">
-  <view class="cu-item" wx:for="{{source56}}" wx:key wx:if="{{index<gridCol}}">
+  <view class="cu-item" wx:for="{{source56}}" wx:key wx:if="{{index<gridCol}}"bindtap="showInfo" data-id="{{item.sourceId}}">
     <text >{{item.sourceName}}</text>
     <text >{{item.sourceClassRoom}}</text>
   </view>
 </view>
 <view class="cu-list grid col-{{gridCol}} solid-top">
-  <view class="cu-item" wx:for="{{source78}}" wx:key wx:if="{{index<gridCol}}">
+  <view class="cu-item " wx:for="{{source78}}" wx:key wx:if="{{index<gridCol}}"bindtap="showInfo" data-id="{{item.sourceId}}">
     <text >{{item.sourceName}}</text>
     <text >{{item.sourceClassRoom}}</text>
   </view>
 </view>
 <view class="cu-list grid col-{{gridCol}} solid-top">
-  <view class="cu-item" wx:for="{{source910}}" wx:key wx:if="{{index<gridCol}}">
+  <view class="cu-item " wx:for="{{source910}}" wx:key wx:if="{{index<gridCol}}"bindtap="showInfo" data-id="{{item.sourceId}}">
     <text >{{item.sourceName}}</text>
     <text >{{item.sourceClassRoom}}</text>
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>课程信息</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl'>
+      <view>课程名称：{{source.sourceName}}</view><text>\n</text>
+      <view>授课教室：{{source.sourceClassRoom}}</view><text>\n</text>
+      <view>授课老师：{{source.sourceTeacher}}</view><text>\n</text>
+      <view>起始周：{{source.sourceStartWeek}}-{{source.sourceEndWeek}}周</view>
+    </view>
   </view>
 </view>

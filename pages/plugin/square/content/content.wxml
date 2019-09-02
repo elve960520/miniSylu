@@ -1,0 +1,64 @@
+<!--pages/plugin/square/content/content.wxml-->
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class='action' bindtap='bindBack' hover-class="none">
+      <text class='icon-back'></text>帖子详情
+    </view>
+  </view>
+</view>
+<view class="cu-card dynamic no-card">
+  <view class="cu-item shadow">
+    <view class="cu-list menu menu-avatar">
+      <view class="cu-item">
+        <image class="cu-avatar round lg" mode="aspectFill" src="{{content.userImage}}"></image>
+        <view class='content flex-sub'>
+          <view>{{content.xingming}}</view>
+          <view class='text-gray text-sm flex justify-between'>
+            {{content.month}}月{{content.day}}日 {{content.hour}}:{{content.minute}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='padding-left padding-right padding-bottom-sm' style='padding-top:0px; margin-top:0px;word-break:break-word;' wx:if="{{content.text}}">
+      <text space="ensp" decode="{{true}}" selectable="{{true}}">{{content.text}}    </text>
+    </view>
+    <view class="grid col-3 grid-square flex-sub padding-lr ">
+      <view class="bg-img" wx:for="{{content.fileIdList}}" wx:key wx:for-item="imageItem" bindtap="ViewContentImage" data-list="{{content.fileIdList}}" data-url="{{imageItem}}">
+        <image src='{{imageItem}}' mode='aspectFill' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class="grid col-3 text-center text-grey">
+      <view class="padding" bindtap='setContentLike' data-id="{{content._id}}">
+        <text class="{{content.isLike?'icon-likefill':'icon-like'}} text-lg text-red"></text> {{content.goodCount}}</view>
+      <view class="padding">
+        <text class="icon-comment text-lg text-blue"></text> {{content.commentCount}}</view>
+      <button class="padding shareButton" open-type='share'>
+        <text class="icon-forward text-lg text-green"></text> </button>
+    </view>
+  </view>
+</view>
+
+<scroll-view scroll-y class='scroll-view-y' style='margin-top:1px'>
+  <view class="cu-list menu menu-avatar comment ">
+    <view class="cu-item" wx:for="{{content.commentList}}" wx:key>
+      <image class="cu-avatar round" src="{{item.userImage}}"></image>
+      <view class='content' bindtap="commentToOne" data-name="{{item.xingming}}" data-time="{{item.time}}">
+        <view class='text-grey text-sm' style='text-align: left;'>{{item.xingming}}
+          <text wx:if="{{item.commentTo}}"> 回复 {{item.commentTo}}</text> :</view>
+        <view class='text-gray text-content text-xs ' style='text-align: left;'>
+          {{item.month}}月{{item.day}}日 {{item.hour}}:{{item.minute}}
+        </view>
+        <view class='flex justify-between'>
+          <view class='text-balck text-df' style='text-align: left;'>{{item.value}}</view>
+        </view>
+      </view>
+      <view class='top text-gray' style='padding-top:0rpx;margin-top:0rpx;' bindtap='setCommentLike' data-time="{{item.time}}">
+        <text class="icon-appreciate text-lg {{item.isZan?'text-red':'text-gray'}}"> </text> {{item.goodCount}}
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<view class="cu-bar foot input">
+  <input class='solid-bottom comment-input' focus="{{false}}" maxlength="140" cursor-spacing="10" placeholder='{{commentTo?"回复："+commentTo:"发表评论"}}' bindinput="commentInput" value='{{commentValue}}'></input>
+  <button class='cu-btn bg-gradual-blue shadow' bindtap='pushComment'>发送</button>
+</view>

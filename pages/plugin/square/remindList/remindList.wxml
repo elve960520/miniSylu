@@ -7,24 +7,24 @@
   </view>
 </view>
 
-<view class="cu-list menu sm-border margin-top card-menu margin-bottom">
-  <view class="cu-item " >
+<view class="cu-list menu sm-border margin-top card-menu margin-bottom" wx:if="{{contentLikeList.length>0}}">
+  <view class="cu-item " wx:for="{{contentLikeList}}" wx:key bindtap="lookContent" data-id="{{item.id}}">
+    <view class='content' >
+      <text class="text-grey"> <text class="text-black">{{item.xingming}}</text> 给你的帖子: <text class="text-black">{{item.text}}</text> 点了赞</text>
+    </view>
+  </view>
+</view>
+<view class="cu-list menu sm-border margin-top card-menu margin-bottom" wx:if="{{commentLikeList.length>0}}">
+  <view class="cu-item " wx:for="{{commentLikeList}}" wx:key bindtap="lookContent" data-id="{{item.id}}">
     <view class='content'>
-      <text wx:for="{{contentLikeList}}" wx:key> {{item.xingming}} </text>给你的帖子点了赞
+      <text class="text-grey"> <text class="text-black">{{item.xingming}}</text> 给你的评论: <text class="text-black">{{item.commentText}}</text> 点了赞</text>
     </view>
   </view>
 </view>
 <view class="cu-list menu sm-border margin-top card-menu margin-bottom">
-  <view class="cu-item " >
+  <view class="cu-item " wx:for="{{commentList}}" wx:key bindtap="lookContent" data-id="{{item.id}}">
     <view class='content'>
-      <text wx:for="{{commentLikeList}}" wx:key> {{item.xingming}} </text>给你的评论点了赞
-    </view>
-  </view>
-</view>
-<view class="cu-list menu sm-border margin-top card-menu margin-bottom">
-  <view class="cu-item " wx:for="{{commentList}}" wx:key>
-    <view class='content'>
-      <text >{{item.xingming}}评论了你：{{item.comment}}</text>
+      <text class="text-grey"><text class="text-black">{{item.xingming}}</text> 评论了你：<text class="text-black">{{item.comment}}</text></text>
     </view>
   </view>
 </view>

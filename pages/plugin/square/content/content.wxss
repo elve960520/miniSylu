@@ -1,0 +1,78 @@
+/* pages/square/square.wxss */
+.round-click{
+    height: 120rpx;
+    width: 120rpx;
+    /* background-color: #6eddff; */
+    border-radius: 100%;
+    position: fixed;
+    bottom: 60rpx;
+    right: 40rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+}
+.round-click text{
+  font-size: 32rpx;
+  max-width: 80rpx;
+  color: #fff;
+  text-align: center;
+}
+
+textarea{
+  text-align: left;
+}
+.grid.grid-square>view.bg-img image {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+  left: 0rpx;
+}
+
+.cu-tag {
+	font-size: 24rpx;
+	vertical-align: middle;
+	position: relative;
+  /* left:0rpx; */
+  /* position: absolute; */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 0rpx 16rpx;
+	height: 48rpx;
+	font-family: Helvetica Neue, Helvetica, sans-serif;
+	white-space: nowrap;
+}
+.bg-img {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.shareButton{
+  background: transparent;
+  height: auto;
+  width: auto;
+  border: none;
+  padding: 0px;
+  margin-top: 5rpx;
+  /* outline: none； */
+}
+.shareButton::after{
+  border: none
+}
+
+.scroll-view-y{
+  padding-bottom: 55px;
+  height: auto
+}
+.comment-input{
+  text-align: left;
+}
+
+/* .commentModal > .text-content{
+  text-align: left;
+} */
+.top{
+  text-align: top;
+}

@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env: 'test-elve'
+  env: 'release-elve'
 })
 const db = cloud.database()
 // 云函数入口函数
