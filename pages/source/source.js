@@ -168,6 +168,7 @@ Page({
         console.log(parseInt(res.data.weekNum));
       }
     });
+
   },
 
   /**
@@ -186,6 +187,26 @@ Page({
     //   }
     // })
     //this.loadProgress();
+    //获取课表
+    wx.request({
+      url: 'https://sylucloud.cn/getSource',
+      data: {
+        xuehao: wx.getStorageSync('xuehao'),
+        mima: wx.getStorageSync('mima')
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'post',
+      success(res) {
+        //wx.hideLoading()
+        console.log(res.data)
+        wx.setStorage({
+          key: 'sourceArray',
+          data: res.data,
+        })
+      }
+    });
   },
 
   /**

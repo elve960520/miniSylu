@@ -7,6 +7,19 @@
   </view>
 </view>
 <view class="cu-timeline">
+  <view class="cu-time">9-12</view>
+  <view class="cu-item">
+    <view class="content">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-cyan">V1.4</view>
+        <view class="cu-tag line-cyan">2019/9/12</view>
+      </view>
+      <view class='margin-top'>
+        1.4 版本更新: 暂停校园广场功能（微信审核问题）,修复无法切换学期bug</view>
+      <view>DONE: 课程表，成绩，绩点，校园广场（暂停使用）</view>
+      <view>TODO: 我的社团，蹭课，理工通讯录，人群分布</view>
+    </view>
+  </view>
   <view class="cu-time">7-18</view>
   <view class="cu-item">
     <view class="content">
